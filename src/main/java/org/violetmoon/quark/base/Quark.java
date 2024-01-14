@@ -19,13 +19,15 @@ import org.violetmoon.quark.integration.terrablender.AbstractUndergroundBiomeHan
 import org.violetmoon.quark.integration.terrablender.TerrablenderUndergroundBiomeHandler;
 import org.violetmoon.quark.integration.terrablender.VanillaUndergroundBiomeHandler;
 import org.violetmoon.zeta.Zeta;
+import org.violetmoon.zeta.multiloader.Env;
+import org.violetmoon.zeta.util.Utils;
 import org.violetmoon.zetaimplforge.ForgeZeta;
 
 @Mod(Quark.MOD_ID)
 public class Quark {
 
 	public static final String MOD_ID = "quark";
-	public static final String ODDITIES_ID = "quarkoddities";
+	public static final String ODDITIES_ID = Utils.isDevEnv() ? "quark" : "quarkoddities";
 
 	public static Quark instance;
 	public static CommonProxy proxy;
@@ -51,7 +53,7 @@ public class Quark {
 
 		ZETA.start();
 
-		proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+		proxy = Env.unsafeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 		proxy.start();
 	}
 
