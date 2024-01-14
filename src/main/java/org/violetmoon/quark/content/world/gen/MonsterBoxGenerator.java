@@ -42,7 +42,7 @@ public class MonsterBoxGenerator extends Generator {
 	}
 
 	private boolean canPlaceHere(WorldGenRegion level, BlockPos.MutableBlockPos pos, BlockState state) {
-		if(!state.canBeReplaced())
+		if(!state.canBeReplaced() || state.liquid())
 			return false;
 
 		//Mutable blockpos nudging dance to avoid an allocation, probably not worth it, stupidest thing ever, vibes based optimization
