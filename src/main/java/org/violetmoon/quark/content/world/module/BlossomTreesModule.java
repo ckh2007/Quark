@@ -11,21 +11,10 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.Tags;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.handler.WoodSetHandler;
 import org.violetmoon.quark.base.handler.WoodSetHandler.WoodSet;
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.block.BlossomLeavesBlock;
 import org.violetmoon.quark.content.world.config.BlossomTreeConfig;
 import org.violetmoon.quark.content.world.gen.BlossomTreeGenerator;
@@ -38,14 +27,9 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.event.play.loading.ZGatherHints;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.world.PassthruTreeGrower;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.violetmoon.quark.base.handler.FuelHandler;
-import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.zeta.world.PassthroughTreeGrower;
 import org.violetmoon.zeta.world.WorldGenHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +93,7 @@ public class BlossomTreesModule extends ZetaModule {
 		tree.grower = new PassthroughTreeGrower(configuredFeatureKey);
 		tree.sapling = new ZetaSaplingBlock(regname, this, tree.grower);
 
-		FuelHandler.addFuel(tree.sapling, 100);
+		Quark.ZETA.fuel.addFuel(tree.sapling, 100);
 
 		event.getVariantRegistry().addFlowerPot(tree.sapling, zeta.registry.getRegistryName(tree.sapling, BuiltInRegistries.BLOCK).getPath(), Functions.identity()); //sure
 

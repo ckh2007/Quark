@@ -12,18 +12,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import com.google.common.base.Functions;
-import com.google.common.collect.ImmutableSet;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.handler.WoodSetHandler;
 import org.violetmoon.quark.base.handler.WoodSetHandler.WoodSet;
@@ -45,7 +33,6 @@ import org.violetmoon.zeta.event.play.loading.ZLootTableLoad;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
-import org.violetmoon.zeta.world.PassthruTreeGrower;
 import org.violetmoon.zeta.world.PassthroughTreeGrower;
 
 @ZetaLoadModule(category = "world")
@@ -101,7 +88,7 @@ public class AncientWoodModule extends ZetaModule {
 		ancient_leaves = new ZetaLeavesBlock(woodSet.name, this, MapColor.PLANT);
 		ancient_sapling = new ZetaSaplingBlock("ancient", this, new PassthroughTreeGrower(configuredFeatureKey)); //actually called "ancient_sapling"
 
-		FuelHandler.addFuel(ancient_sapling, 100);
+		Quark.ZETA.fuel.addFuel(ancient_sapling, 100);
 
 		event.getVariantRegistry().addFlowerPot(ancient_sapling, "ancient_sapling", Functions.identity()); //actually "potted_ancient_sapling"
 
