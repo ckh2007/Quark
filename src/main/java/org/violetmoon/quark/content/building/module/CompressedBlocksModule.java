@@ -1,17 +1,9 @@
 package org.violetmoon.quark.content.building.module;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.function.BooleanSupplier;
 
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
-
-import org.violetmoon.quark.base.handler.FuelHandler;
+import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.block.ZetaFlammableBlock;
 import org.violetmoon.zeta.block.ZetaFlammablePillarBlock;
@@ -23,8 +15,16 @@ import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
 
-import java.util.List;
-import java.util.function.BooleanSupplier;
+import com.google.common.collect.Lists;
+
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 
 @ZetaLoadModule(category = "building")
 public class CompressedBlocksModule extends ZetaModule {
@@ -161,9 +161,9 @@ public class CompressedBlocksModule extends ZetaModule {
 					ComposterBlock.COMPOSTABLES.put(block.asItem(), 1F);
 		});
 
-		FuelHandler.addFuel(stick_block, stickBlockFuelTime);
-		FuelHandler.addFuel(charcoal_block, charcoalBlockFuelTime);
-		FuelHandler.addFuel(blaze_lantern, blazeLanternFuelTime);
+		Quark.ZETA.fuel.addFuel(stick_block, stickBlockFuelTime);
+		Quark.ZETA.fuel.addFuel(charcoal_block, charcoalBlockFuelTime);
+		Quark.ZETA.fuel.addFuel(blaze_lantern, blazeLanternFuelTime);
 	}
 
 	private Block pillar(String name, MapColor color, boolean compost, BooleanSupplier cond, int flammability) {

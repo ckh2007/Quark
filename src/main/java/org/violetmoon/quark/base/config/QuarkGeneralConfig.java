@@ -56,9 +56,6 @@ public class QuarkGeneralConfig {
 	@Config(description = "Should Quark treat anything with 'shulker_box' in its item identifier as a shulker box?")
 	public static boolean interpretShulkerBoxLikeBlocks = true;
 
-	@Config(description = "Set to true to enable a system that debugs quark's worldgen features. This should ONLY be used if you're asked to by a dev.")
-	public static boolean enableWorldgenWatchdog = false;
-
 	@Config(description = "Set to true if you need to find the class name for a screen that's causing problems")
 	public static boolean printScreenClassnames = false;
 
@@ -67,9 +64,6 @@ public class QuarkGeneralConfig {
 
 	@Config(description = "If set to true, the 'Allowed Screens' option will work as a Blacklist rather than a Whitelist. WARNING: Use at your own risk as some mods may not support this.")
 	private static boolean useScreenListBlacklist = false;
-
-	@Config(description = "Set to true to make the quark big worldgen features such as stone clusters generate as spheres rather than unique shapes. It's faster, but won't look as cool")
-	public static boolean useFastWorldgen = false;
 
 	@Config(description = "If 'true' and TerraBlender is present, Quark will add a TerraBlender region. The region will contain vanilla biomes and the Glimmering Weald.")
 	public static boolean terrablenderAddRegion = true;

@@ -1,5 +1,19 @@
 package org.violetmoon.quark.base.client.config;
 
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.config.QuarkGeneralConfig;
+import org.violetmoon.quark.base.handler.ContributorRewardHandler;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
@@ -10,21 +24,6 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.config.QuarkGeneralConfig;
-import org.violetmoon.quark.base.handler.ContributorRewardHandler;
-import org.violetmoon.quark.base.handler.MiscUtil;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class QButton extends Button {
 
@@ -146,7 +145,7 @@ public class QButton extends Button {
 
 			int u = 256 - iconIndex * w;
 
-			guiGraphics.blit(MiscUtil.GENERAL_ICONS, rx, ry, u, v, w, h);
+			guiGraphics.blit(ClientUtil.GENERAL_ICONS, rx, ry, u, v, w, h);
 		}
 
 		if(showBubble && QuarkGeneralConfig.enableOnboarding) {
@@ -155,7 +154,7 @@ public class QButton extends Button {
 			if(QuarkClient.ticker.total % 20 > 10)
 				cy++;
 
-			MiscUtil.Client.drawChatBubble(guiGraphics, getX() + 16, cy, font, I18n.get("quark.misc.configure_quark_here"), alpha, true);
+			ClientUtil.drawChatBubble(guiGraphics, getX() + 16, cy, font, I18n.get("quark.misc.configure_quark_here"), alpha, true);
 		}
 	}
 

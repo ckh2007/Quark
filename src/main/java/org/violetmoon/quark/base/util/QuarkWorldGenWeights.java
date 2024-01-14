@@ -1,6 +1,6 @@
-package org.violetmoon.quark.base.world;
+package org.violetmoon.quark.base.util;
 
-public class WorldGenWeights {
+public class QuarkWorldGenWeights {
 
 	// UNDERGROUND_ORES
 	public static final int CLAY = 0;

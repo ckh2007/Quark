@@ -1,5 +1,14 @@
 package org.violetmoon.quark.content.world.block;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.zeta.block.ZetaBushBlock;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.core.BlockPos;
@@ -17,16 +26,6 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.block.ZetaBushBlock;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.util.Collections;
-import java.util.List;
 
 public class GlowLichenGrowthBlock extends ZetaBushBlock implements BonemealableBlock {
 

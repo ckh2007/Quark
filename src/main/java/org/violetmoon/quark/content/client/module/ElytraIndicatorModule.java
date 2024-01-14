@@ -1,5 +1,11 @@
 package org.violetmoon.quark.content.client.module;
 
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -9,12 +15,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
 
 @ZetaLoadModule(category = "client")
 public class ElytraIndicatorModule extends ZetaModule {
@@ -53,7 +53,7 @@ public class ElytraIndicatorModule extends ZetaModule {
 
 				int x = window.getGuiScaledWidth() / 2 - 100;
 				int y = window.getGuiScaledHeight() - event.getLeftHeight();
-				guiGraphics.blit(MiscUtil.GENERAL_ICONS, x, y, 184, 35, 9, 9, 256, 256);
+				guiGraphics.blit(ClientUtil.GENERAL_ICONS, x, y, 184, 35, 9, 9, 256, 256);
 
 				pose.popPose();
 			}

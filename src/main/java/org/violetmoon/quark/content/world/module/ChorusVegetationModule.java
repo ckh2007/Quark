@@ -1,12 +1,6 @@
 package org.violetmoon.quark.content.world.module;
 
-import com.google.common.base.Functions;
-
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.block.ChorusVegetationBlock;
 import org.violetmoon.quark.content.world.gen.ChorusVegetationGenerator;
 import org.violetmoon.zeta.config.Config;
@@ -16,6 +10,12 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.world.WorldGenHandler;
+
+import com.google.common.base.Functions;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
 @ZetaLoadModule(category = "world")
 public class ChorusVegetationModule extends ZetaModule {
@@ -55,6 +55,6 @@ public class ChorusVegetationModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		WorldGenHandler.addGenerator(this, new ChorusVegetationGenerator(), Decoration.VEGETAL_DECORATION, WorldGenWeights.CHORUS_VEGETATION);
+		WorldGenHandler.addGenerator(this, new ChorusVegetationGenerator(), Decoration.VEGETAL_DECORATION, QuarkWorldGenWeights.CHORUS_VEGETATION);
 	}
 }

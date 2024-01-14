@@ -1,5 +1,33 @@
 package org.violetmoon.quark.content.experimental.module;
 
+import java.util.List;
+
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.network.message.experimental.PlaceVariantUpdateMessage;
+import org.violetmoon.quark.content.experimental.client.screen.VariantSelectorScreen;
+import org.violetmoon.quark.content.experimental.client.tooltip.VariantsComponent;
+import org.violetmoon.quark.content.experimental.config.VariantsConfig;
+import org.violetmoon.quark.content.experimental.item.HammerItem;
+import org.violetmoon.zeta.client.event.load.ZKeyMapping;
+import org.violetmoon.zeta.client.event.load.ZTooltipComponents;
+import org.violetmoon.zeta.client.event.play.ZClientTick;
+import org.violetmoon.zeta.client.event.play.ZInput;
+import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
+import org.violetmoon.zeta.client.event.play.ZRenderTooltip;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.bus.ZPhase;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Either;
@@ -30,35 +58,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.network.message.experimental.PlaceVariantUpdateMessage;
-import org.violetmoon.quark.content.experimental.client.screen.VariantSelectorScreen;
-import org.violetmoon.quark.content.experimental.client.tooltip.VariantsComponent;
-import org.violetmoon.quark.content.experimental.config.VariantsConfig;
-import org.violetmoon.quark.content.experimental.item.HammerItem;
-import org.violetmoon.zeta.client.event.load.ZKeyMapping;
-import org.violetmoon.zeta.client.event.load.ZTooltipComponents;
-import org.violetmoon.zeta.client.event.play.ZClientTick;
-import org.violetmoon.zeta.client.event.play.ZInput;
-import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
-import org.violetmoon.zeta.client.event.play.ZRenderTooltip;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.bus.ZPhase;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.util.List;
 
 @ZetaLoadModule(
 	category = "experimental", enabledByDefault = false,
@@ -353,7 +352,7 @@ public class VariantSelectorModule extends ZetaModule {
 						RenderSystem.setShader(GameRenderer::getPositionTexShader);
 						RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.75F);
 
-						guiGraphics.blit(MiscUtil.GENERAL_ICONS, posX + 8, posY, 0, 141, 22, 15, 256, 256);
+						guiGraphics.blit(ClientUtil.GENERAL_ICONS, posX + 8, posY, 0, 141, 22, 15, 256, 256);
 
 						posX += width * 2;
 					} else {

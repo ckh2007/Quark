@@ -1,13 +1,14 @@
 package org.violetmoon.quark.content.world.undergroundstyle.base;
 
+import java.util.Random;
+
+import org.violetmoon.zeta.world.generator.multichunk.ClusterBasedGenerator;
+import org.violetmoon.zeta.world.generator.multichunk.ClusterBasedGenerator.IGenerationContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-
 import net.minecraft.world.level.levelgen.Heightmap;
-import org.violetmoon.quark.base.world.generator.multichunk.ClusterBasedGenerator;
-
-import java.util.Random;
 
 public class UndergroundStyleGenerator extends ClusterBasedGenerator {
 

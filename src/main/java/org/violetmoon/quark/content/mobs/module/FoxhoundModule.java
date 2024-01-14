@@ -3,8 +3,6 @@ package org.violetmoon.quark.content.mobs.module;
 import static net.minecraftforge.event.entity.living.LivingChangeTargetEvent.LivingTargetType.BEHAVIOR_TARGET;
 
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.config.QuarkGeneralConfig;
-import org.violetmoon.quark.base.world.EntitySpawnHandler;
 import org.violetmoon.quark.content.mobs.client.render.entity.FoxhoundRenderer;
 import org.violetmoon.quark.content.mobs.entity.Foxhound;
 import org.violetmoon.zeta.advancement.ManualTrigger;
@@ -25,6 +23,7 @@ import org.violetmoon.zeta.event.play.entity.living.ZLivingChangeTarget;
 import org.violetmoon.zeta.event.play.entity.living.ZSleepingLocationCheck;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.world.EntitySpawnHandler;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -78,10 +77,10 @@ public class FoxhoundModule extends ZetaModule {
 				.build("foxhound");
 		Quark.ZETA.registry.register(foxhoundType, "foxhound", Registries.ENTITY_TYPE);
 
-		EntitySpawnHandler.registerSpawn(foxhoundType, MobCategory.MONSTER, Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Foxhound::spawnPredicate, spawnConfig);
-		EntitySpawnHandler.track(foxhoundType, MobCategory.MONSTER, lesserSpawnConfig, true);
+		Quark.ZETA.entitySpawn.registerSpawn(foxhoundType, MobCategory.MONSTER, Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Foxhound::spawnPredicate, spawnConfig);
+		Quark.ZETA.entitySpawn.track(foxhoundType, MobCategory.MONSTER, lesserSpawnConfig, true);
 
-		EntitySpawnHandler.addEgg(this, foxhoundType, 0x890d0d, 0xf2af4b, spawnConfig);
+		Quark.ZETA.entitySpawn.addEgg(this, foxhoundType, 0x890d0d, 0xf2af4b, spawnConfig);
 
 		event.getAdvancementModifierRegistry().addModifier(new MonsterHunterModifier(this, ImmutableSet.of(foxhoundType)));
 		event.getAdvancementModifierRegistry().addModifier(new TwoByTwoModifier(this, ImmutableSet.of(foxhoundType)));

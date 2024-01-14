@@ -1,5 +1,19 @@
 package org.violetmoon.quark.content.tools.item;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.api.ITrowelable;
+import org.violetmoon.quark.api.IUsageTickerOverride;
+import org.violetmoon.quark.content.tools.module.TrowelModule;
+import org.violetmoon.zeta.item.ZetaItem;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.ItemNBTHelper;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,21 +27,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.BlockHitResult;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.api.ITrowelable;
-import org.violetmoon.quark.api.IUsageTickerOverride;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.tools.module.TrowelModule;
-import org.violetmoon.zeta.item.ZetaItem;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-import org.violetmoon.zeta.util.ItemNBTHelper;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class TrowelItem extends ZetaItem implements IUsageTickerOverride {
 

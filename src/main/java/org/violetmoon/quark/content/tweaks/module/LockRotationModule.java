@@ -1,5 +1,28 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
+
+import org.lwjgl.opengl.GL11;
+import org.violetmoon.quark.api.IRotationLockable;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.network.message.SetLockProfileMessage;
+import org.violetmoon.quark.content.building.block.QuarkVerticalSlabBlock;
+import org.violetmoon.quark.content.building.block.VerticalSlabBlock;
+import org.violetmoon.zeta.client.event.load.ZKeyMapping;
+import org.violetmoon.zeta.client.event.play.ZInput;
+import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.play.entity.player.ZPlayer;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -28,30 +51,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.minecraft.world.phys.Vec3;
-
-import org.lwjgl.opengl.GL11;
-
-import org.violetmoon.quark.api.IRotationLockable;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.network.message.SetLockProfileMessage;
-import org.violetmoon.quark.content.building.block.QuarkVerticalSlabBlock;
-import org.violetmoon.quark.content.building.block.VerticalSlabBlock;
-import org.violetmoon.zeta.client.event.load.ZKeyMapping;
-import org.violetmoon.zeta.client.event.play.ZInput;
-import org.violetmoon.zeta.client.event.play.ZRenderGuiOverlay;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.play.entity.player.ZPlayer;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 
 @ZetaLoadModule(category = "tweaks")
 public class LockRotationModule extends ZetaModule {
@@ -262,10 +261,10 @@ public class LockRotationModule extends ZetaModule {
 				Window window = event.getWindow();
 				int x = window.getGuiScaledWidth() / 2 + 20;
 				int y = window.getGuiScaledHeight() / 2 - 8;
-				guiGraphics.blit(MiscUtil.GENERAL_ICONS, x, y, clientProfile.facing.ordinal() * 16, 65, 16, 16, 256, 256);
+				guiGraphics.blit(ClientUtil.GENERAL_ICONS, x, y, clientProfile.facing.ordinal() * 16, 65, 16, 16, 256, 256);
 
 				if(clientProfile.half > -1)
-					guiGraphics.blit(MiscUtil.GENERAL_ICONS, x + 16, y, clientProfile.half * 16, 79, 16, 16, 256, 256);
+					guiGraphics.blit(ClientUtil.GENERAL_ICONS, x + 16, y, clientProfile.half * 16, 79, 16, 16, 256, 256);
 
 				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 

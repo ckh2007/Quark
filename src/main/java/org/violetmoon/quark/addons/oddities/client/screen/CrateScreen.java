@@ -1,5 +1,17 @@
 package org.violetmoon.quark.addons.oddities.client.screen;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.addons.oddities.inventory.CrateMenu;
+import org.violetmoon.quark.addons.oddities.module.CrateModule;
+import org.violetmoon.quark.api.IQuarkButtonAllowed;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
+import org.violetmoon.quark.base.client.handler.InventoryButtonHandler.ButtonTargetType;
+import org.violetmoon.quark.content.client.module.ChestSearchingModule;
+
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -10,19 +22,6 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.addons.oddities.inventory.CrateMenu;
-import org.violetmoon.quark.addons.oddities.module.CrateModule;
-import org.violetmoon.quark.api.IQuarkButtonAllowed;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
-import org.violetmoon.quark.base.client.handler.InventoryButtonHandler.ButtonTargetType;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.client.module.ChestSearchingModule;
-
-import java.util.List;
 
 public class CrateScreen extends AbstractContainerScreen<CrateMenu> implements IQuarkButtonAllowed {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(Quark.MOD_ID, "textures/gui/crate.png");
@@ -154,14 +153,14 @@ public class CrateScreen extends AbstractContainerScreen<CrateMenu> implements I
 		if(!Quark.ZETA.modules.get(ChestSearchingModule.class).searchBarShown()) {
 			String s = menu.getTotal() + "/" + CrateModule.maxItems;
 
-			int color = MiscUtil.Client.getGuiTextColor("crate_count");
+			int color = ClientUtil.getGuiTextColor("crate_count");
 			guiGraphics.drawString(font, s, i + this.imageWidth - font.width(s) - 8 - InventoryButtonHandler.getActiveButtons(ButtonTargetType.CONTAINER_INVENTORY).size() * 12, j + 6, color, false);
 		}
 	}
 
 	@Override
 	protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		int color = MiscUtil.Client.getGuiTextColor("crate_count");
+		int color = ClientUtil.getGuiTextColor("crate_count");
 
 		guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, color, false);
 		guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, color, false);

@@ -1,5 +1,21 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import java.util.EnumMap;
+import java.util.Map;
+
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.content.tweaks.block.DirtyGlassBlock;
+import org.violetmoon.zeta.block.ZetaBlock;
+import org.violetmoon.zeta.block.ZetaInheritedPaneBlock;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.item.ZetaItem;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -11,22 +27,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.tweaks.block.DirtyGlassBlock;
-import org.violetmoon.zeta.block.ZetaBlock;
-import org.violetmoon.zeta.block.ZetaInheritedPaneBlock;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.item.ZetaItem;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-
-import java.util.EnumMap;
-import java.util.Map;
 
 /**
  * @author WireSegal

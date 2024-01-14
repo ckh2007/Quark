@@ -1,6 +1,35 @@
 package org.violetmoon.quark.content.mobs.module;
 
+import java.util.List;
+
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.handler.QuarkSounds;
+import org.violetmoon.quark.content.mobs.client.render.entity.CrabRenderer;
+import org.violetmoon.quark.content.mobs.entity.Crab;
+import org.violetmoon.zeta.advancement.modifier.BalancedDietModifier;
+import org.violetmoon.zeta.advancement.modifier.FuriousCocktailModifier;
+import org.violetmoon.zeta.advancement.modifier.TwoByTwoModifier;
+import org.violetmoon.zeta.client.event.load.ZClientSetup;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.config.type.CompoundBiomeConfig;
+import org.violetmoon.zeta.config.type.EntitySpawnConfig;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZEntityAttributeCreation;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.loading.ZVillagerTrades;
+import org.violetmoon.zeta.item.ZetaItem;
+import org.violetmoon.zeta.item.ZetaMobBucketItem;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.util.ZetaEffect;
+import org.violetmoon.zeta.world.EntitySpawnHandler;
+
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -25,33 +54,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.material.Fluids;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.QuarkSounds;
-import org.violetmoon.quark.base.world.EntitySpawnHandler;
-import org.violetmoon.quark.content.mobs.client.render.entity.CrabRenderer;
-import org.violetmoon.quark.content.mobs.entity.Crab;
-import org.violetmoon.zeta.advancement.modifier.BalancedDietModifier;
-import org.violetmoon.zeta.advancement.modifier.FuriousCocktailModifier;
-import org.violetmoon.zeta.advancement.modifier.TwoByTwoModifier;
-import org.violetmoon.zeta.client.event.load.ZClientSetup;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.config.type.CompoundBiomeConfig;
-import org.violetmoon.zeta.config.type.EntitySpawnConfig;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZEntityAttributeCreation;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.loading.ZVillagerTrades;
-import org.violetmoon.zeta.item.ZetaItem;
-import org.violetmoon.zeta.item.ZetaMobBucketItem;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-import org.violetmoon.zeta.util.Hint;
-import org.violetmoon.zeta.util.ZetaEffect;
-
-import java.util.List;
 
 /**
  * @author WireSegal
@@ -124,8 +126,8 @@ public class CrabsModule extends ZetaModule {
 				.build("crab");
 		Quark.ZETA.registry.register(crabType, "crab", Registries.ENTITY_TYPE);
 
-		EntitySpawnHandler.registerSpawn(crabType, MobCategory.CREATURE, Type.ON_GROUND, Types.MOTION_BLOCKING_NO_LEAVES, Crab::spawnPredicate, spawnConfig);
-		EntitySpawnHandler.addEgg(this, crabType, 0x893c22, 0x916548, spawnConfig);
+		Quark.ZETA.entitySpawn.registerSpawn(crabType, MobCategory.CREATURE, Type.ON_GROUND, Types.MOTION_BLOCKING_NO_LEAVES, Crab::spawnPredicate, spawnConfig);
+		Quark.ZETA.entitySpawn.addEgg(this, crabType, 0x893c22, 0x916548, spawnConfig);
 
 		event.getAdvancementModifierRegistry().addModifier(new FuriousCocktailModifier(this, () -> enableBrewing, ImmutableSet.of(resilience))
 				.setCondition(() -> resilienceRequiredForAllEffects));

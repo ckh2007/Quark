@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.config.type.inputtable.ConvulsionMatrixConfig;
+import org.violetmoon.quark.base.config.type.ConvulsionMatrixConfig;
 import org.violetmoon.zeta.client.event.play.ZFirstClientTick;
 import org.violetmoon.zeta.config.Config;
 import org.violetmoon.zeta.event.bus.LoadEvent;

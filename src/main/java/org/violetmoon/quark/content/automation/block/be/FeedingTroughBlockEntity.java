@@ -1,5 +1,13 @@
 package org.violetmoon.quark.content.automation.block.be;
 
+import java.util.List;
+import java.util.Random;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.content.automation.block.FeedingTroughBlock;
+import org.violetmoon.quark.content.automation.module.FeedingTroughModule;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -22,13 +30,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
-import org.jetbrains.annotations.NotNull;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.automation.block.FeedingTroughBlock;
-import org.violetmoon.quark.content.automation.module.FeedingTroughModule;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author WireSegal

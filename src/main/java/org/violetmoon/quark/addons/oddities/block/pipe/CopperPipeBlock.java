@@ -1,5 +1,12 @@
 package org.violetmoon.quark.addons.oddities.block.pipe;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.addons.oddities.block.be.PipeBlockEntity;
+import org.violetmoon.quark.addons.oddities.module.PipesModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,15 +35,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.addons.oddities.block.be.PipeBlockEntity;
-import org.violetmoon.quark.addons.oddities.module.PipesModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import static org.violetmoon.quark.base.handler.MiscUtil.directionProperty;
 
 public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedBlock {
 
@@ -134,7 +132,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 	public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
 		int index = 0;
 		for(Direction dir : Direction.values()) {
-			if(state.getValue(directionProperty(dir)))
+			if(state.getValue(MiscUtil.directionProperty(dir)))
 				index += (1 << dir.ordinal());
 		}
 

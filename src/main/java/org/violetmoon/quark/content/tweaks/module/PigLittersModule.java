@@ -1,5 +1,15 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
+import org.violetmoon.zeta.event.play.entity.living.ZBabyEntitySpawn;
+import org.violetmoon.zeta.event.play.entity.living.ZLivingTick;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,16 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
-import org.violetmoon.zeta.event.play.entity.living.ZBabyEntitySpawn;
-import org.violetmoon.zeta.event.play.entity.living.ZLivingTick;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
 
 @ZetaLoadModule(category = "tweaks")
 public class PigLittersModule extends ZetaModule {

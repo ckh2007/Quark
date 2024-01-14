@@ -1,5 +1,32 @@
 package org.violetmoon.quark.content.client.module;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.BiPredicate;
+import java.util.regex.Pattern;
+
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.api.IQuarkButtonAllowed;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
+import org.violetmoon.quark.base.client.handler.InventoryButtonHandler.ButtonTargetType;
+import org.violetmoon.quark.base.config.QuarkGeneralConfig;
+import org.violetmoon.quark.base.config.type.RGBAColorConfig;
+import org.violetmoon.quark.base.handler.InventoryTransferHandler;
+import org.violetmoon.quark.base.handler.SimilarBlockTypeHandler;
+import org.violetmoon.quark.content.management.client.screen.widgets.MiniInventoryButton;
+import org.violetmoon.zeta.client.event.load.ZClientSetup;
+import org.violetmoon.zeta.client.event.play.ZRenderContainerScreen;
+import org.violetmoon.zeta.client.event.play.ZScreen;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.ItemNBTHelper;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -29,34 +56,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.EmptyHandler;
-
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.api.IQuarkButtonAllowed;
-import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
-import org.violetmoon.quark.base.client.handler.InventoryButtonHandler.ButtonTargetType;
-import org.violetmoon.quark.base.config.QuarkGeneralConfig;
-import org.violetmoon.quark.base.config.type.inputtable.RGBAColorConfig;
-import org.violetmoon.quark.base.handler.InventoryTransferHandler;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.handler.SimilarBlockTypeHandler;
-import org.violetmoon.quark.content.management.client.screen.widgets.MiniInventoryButton;
-import org.violetmoon.zeta.client.event.load.ZClientSetup;
-import org.violetmoon.zeta.client.event.play.ZRenderContainerScreen;
-import org.violetmoon.zeta.client.event.play.ZScreen;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.util.ItemNBTHelper;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.regex.Pattern;
 
 @ZetaLoadModule(category = "client")
 public class ChestSearchingModule extends ZetaModule {
@@ -210,7 +209,7 @@ public class ChestSearchingModule extends ZetaModule {
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-			guiGraphics.blit(MiscUtil.GENERAL_ICONS, x, y, 0, 0, 126, 13, 256, 256);
+			guiGraphics.blit(ClientUtil.GENERAL_ICONS, x, y, 0, 0, 126, 13, 256, 256);
 		}
 
 		@Override

@@ -1,21 +1,22 @@
 package org.violetmoon.quark.content.world.gen;
 
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.BooleanSupplier;
+
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.content.world.config.AirStoneClusterConfig;
+import org.violetmoon.quark.content.world.config.BigStoneClusterConfig;
+import org.violetmoon.quark.content.world.module.BigStoneClustersModule;
+import org.violetmoon.zeta.world.generator.multichunk.ClusterBasedGenerator;
+import org.violetmoon.zeta.world.generator.multichunk.ClusterBasedGenerator.IGenerationContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.world.generator.multichunk.ClusterBasedGenerator;
-import org.violetmoon.quark.content.world.config.AirStoneClusterConfig;
-import org.violetmoon.quark.content.world.config.BigStoneClusterConfig;
-import org.violetmoon.quark.content.world.module.BigStoneClustersModule;
-
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.BooleanSupplier;
 
 public class BigStoneClusterGenerator extends ClusterBasedGenerator {
 

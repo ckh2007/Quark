@@ -1,28 +1,11 @@
 package org.violetmoon.quark.content.world.module;
 
-import com.google.common.collect.Lists;
-
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.material.MapColor;
+import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.ToolInteractionHandler;
 import org.violetmoon.quark.base.util.CorundumColor;
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.tools.module.BeaconRedirectionModule;
 import org.violetmoon.quark.content.world.block.CorundumBlock;
 import org.violetmoon.quark.content.world.block.CorundumClusterBlock;
@@ -41,8 +24,24 @@ import org.violetmoon.zeta.event.play.loading.ZGatherHints;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
+import org.violetmoon.zeta.world.WorldGenHandler;
 
-import java.util.List;
+import com.google.common.collect.Lists;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.material.MapColor;
 
 @ZetaLoadModule(category = "world")
 public class CorundumModule extends ZetaModule {
@@ -110,7 +109,7 @@ public class CorundumModule extends ZetaModule {
 		WorldGenHandler.addGenerator(this,
 			new UndergroundStyleGenerator(generationSettings, "corundum"),
 			GenerationStep.Decoration.UNDERGROUND_DECORATION,
-			WorldGenWeights.UNDERGROUND_BIOMES
+			QuarkWorldGenWeights.UNDERGROUND_BIOMES
 		);
 	}
 

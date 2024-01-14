@@ -1,5 +1,34 @@
 package org.violetmoon.quark.addons.oddities.module;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.violetmoon.quark.addons.oddities.block.MatrixEnchantingTableBlock;
+import org.violetmoon.quark.addons.oddities.block.be.MatrixEnchantingTableBlockEntity;
+import org.violetmoon.quark.addons.oddities.client.render.be.MatrixEnchantingTableRenderer;
+import org.violetmoon.quark.addons.oddities.client.screen.MatrixEnchantingScreen;
+import org.violetmoon.quark.addons.oddities.inventory.MatrixEnchantingMenu;
+import org.violetmoon.quark.addons.oddities.util.CustomInfluence;
+import org.violetmoon.quark.addons.oddities.util.Influence;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.zeta.advancement.ManualTrigger;
+import org.violetmoon.zeta.client.event.load.ZClientSetup;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.ZBlock;
+import org.violetmoon.zeta.event.play.ZItemTooltip;
+import org.violetmoon.zeta.event.play.entity.player.ZPlayerInteract;
+import org.violetmoon.zeta.event.play.loading.ZGatherHints;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.ItemNBTHelper;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.ChatFormatting;
@@ -21,35 +50,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.FakePlayer;
-
-import org.violetmoon.quark.addons.oddities.block.MatrixEnchantingTableBlock;
-import org.violetmoon.quark.addons.oddities.block.be.MatrixEnchantingTableBlockEntity;
-import org.violetmoon.quark.addons.oddities.client.render.be.MatrixEnchantingTableRenderer;
-import org.violetmoon.quark.addons.oddities.client.screen.MatrixEnchantingScreen;
-import org.violetmoon.quark.addons.oddities.inventory.MatrixEnchantingMenu;
-import org.violetmoon.quark.addons.oddities.util.CustomInfluence;
-import org.violetmoon.quark.addons.oddities.util.Influence;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.advancement.ManualTrigger;
-import org.violetmoon.zeta.client.event.load.ZClientSetup;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.ZBlock;
-import org.violetmoon.zeta.event.play.ZItemTooltip;
-import org.violetmoon.zeta.event.play.entity.player.ZPlayerInteract;
-import org.violetmoon.zeta.event.play.loading.ZGatherHints;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.util.ItemNBTHelper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @ZetaLoadModule(category = "oddities")
 public class MatrixEnchantingModule extends ZetaModule {

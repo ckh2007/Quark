@@ -1,5 +1,27 @@
 package org.violetmoon.quark.base.proxy;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.config.QButtonHandler;
+import org.violetmoon.quark.base.client.config.QuarkConfigHomeScreen;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
+import org.violetmoon.quark.base.client.handler.ModelHandler;
+import org.violetmoon.quark.base.handler.ContributorRewardHandler;
+import org.violetmoon.quark.base.handler.WoodSetHandler;
+import org.violetmoon.quark.mixin.mixins.client.accessor.AccessorMultiPlayerGameMode;
+import org.violetmoon.zeta.client.TopLayerTooltipHandler;
+import org.violetmoon.zeta.network.message.C2SUpdateFlag;
+import org.violetmoon.zeta.util.handler.RequiredModTooltipHandler;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,27 +35,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory;
 import net.minecraftforge.fml.ModLoadingContext;
-import org.jetbrains.annotations.Nullable;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.client.config.QButtonHandler;
-import org.violetmoon.quark.base.client.config.QuarkConfigHomeScreen;
-import org.violetmoon.quark.base.client.handler.InventoryButtonHandler;
-import org.violetmoon.quark.base.client.handler.ModelHandler;
-import org.violetmoon.quark.base.handler.ContributorRewardHandler;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.handler.WoodSetHandler;
-import org.violetmoon.quark.mixin.mixins.client.accessor.AccessorMultiPlayerGameMode;
-import org.violetmoon.zeta.client.TopLayerTooltipHandler;
-import org.violetmoon.zeta.network.message.C2SUpdateFlag;
-import org.violetmoon.zeta.util.RequiredModTooltipHandler;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDateTime;
-import java.time.Month;
 
 public class ClientProxy extends CommonProxy {
 
@@ -52,14 +53,12 @@ public class ClientProxy extends CommonProxy {
 				.subscribe(ModelHandler.class) //TODO: Make this especially not a singleton, move it into respective modules
 				.subscribe(ContributorRewardHandler.Client.class)
 				.subscribe(WoodSetHandler.Client.class);
-
+		
 		Quark.ZETA.playBus
 				.subscribe(ContributorRewardHandler.Client.class)
-				.subscribe(MiscUtil.Client.class)
+				.subscribe(ClientUtil.class)
 				.subscribe(InventoryButtonHandler.class)
-				.subscribe(QButtonHandler.class)
-				.subscribe(TopLayerTooltipHandler.class)
-				.subscribe(new RequiredModTooltipHandler.Client(Quark.ZETA)); //TODO: I think this can be spread into ZetaItem/ZetaBlock and not a singleton
+				.subscribe(QButtonHandler.class);
 
 		super.start(); //<- loads and initializes modules
 

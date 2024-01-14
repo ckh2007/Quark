@@ -7,9 +7,7 @@ import java.util.Queue;
 import java.util.function.BooleanSupplier;
 
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
-import org.violetmoon.quark.base.world.generator.OreGenerator;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.block.MyaliteBlock;
 import org.violetmoon.quark.content.world.block.MyaliteColorLogic;
 import org.violetmoon.quark.content.world.config.BigStoneClusterConfig;
@@ -31,6 +29,8 @@ import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.registry.CreativeTabManager;
 import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.world.WorldGenHandler;
+import org.violetmoon.zeta.world.generator.OreGenerator;
 
 import com.google.common.collect.Maps;
 
@@ -142,8 +142,8 @@ public class NewStoneTypesModule extends ZetaModule {
 			((IZetaBlock) normal).setCreativeTab(CreativeModeTabs.NATURAL_BLOCKS, Blocks.PRISMARINE, true);
 
 			defers.add(() -> {
-				WorldGenHandler.addGenerator(module, new OreGenerator(config.dimensions, config.oregenLower, normal.defaultBlockState(), OreGenerator.ALL_DIMS_STONE_MATCHER, trueEnabledCond), Decoration.UNDERGROUND_ORES, WorldGenWeights.NEW_STONES);
-				WorldGenHandler.addGenerator(module, new OreGenerator(config.dimensions, config.oregenUpper, normal.defaultBlockState(), OreGenerator.ALL_DIMS_STONE_MATCHER, trueEnabledCond), Decoration.UNDERGROUND_ORES, WorldGenWeights.NEW_STONES);
+				WorldGenHandler.addGenerator(module, new OreGenerator(config.dimensions, config.oregenLower, normal.defaultBlockState(), OreGenerator.ALL_DIMS_STONE_MATCHER, trueEnabledCond), Decoration.UNDERGROUND_ORES, QuarkWorldGenWeights.NEW_STONES);
+				WorldGenHandler.addGenerator(module, new OreGenerator(config.dimensions, config.oregenUpper, normal.defaultBlockState(), OreGenerator.ALL_DIMS_STONE_MATCHER, trueEnabledCond), Decoration.UNDERGROUND_ORES, QuarkWorldGenWeights.NEW_STONES);
 			});
 		}
 

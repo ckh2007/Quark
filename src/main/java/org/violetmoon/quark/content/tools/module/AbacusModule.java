@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import org.joml.Matrix4f;
-import org.violetmoon.quark.base.config.type.inputtable.RGBAColorConfig;
+import org.violetmoon.quark.base.config.type.RGBAColorConfig;
 import org.violetmoon.quark.content.tools.item.AbacusItem;
 import org.violetmoon.zeta.client.event.load.ZClientSetup;
 import org.violetmoon.zeta.client.event.play.ZHighlightBlock;

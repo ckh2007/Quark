@@ -1,5 +1,12 @@
 package org.violetmoon.quark.content.building.block;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.RenderLayerRegistry;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.UseOnContext;
@@ -12,16 +19,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.Vec3;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.RenderLayerRegistry;
-
-import static org.violetmoon.quark.base.handler.MiscUtil.directionProperty;
 
 /**
  * Unfortunately, due to Ladder Weirdness (tm) this block is NYI
@@ -70,7 +67,7 @@ public class HollowWoodBlock extends HollowFrameBlock {
 	public BlockState rotate(BlockState state, Rotation direction) {
 		BlockState newState = state;
 		for(Direction dir : Direction.values())
-			newState = newState.setValue(directionProperty(dir), state.getValue(directionProperty(direction.rotate(dir))));
+			newState = newState.setValue(MiscUtil.directionProperty(dir), state.getValue(MiscUtil.directionProperty(direction.rotate(dir))));
 		return newState;
 	}
 
@@ -79,7 +76,7 @@ public class HollowWoodBlock extends HollowFrameBlock {
 	public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirror) {
 		BlockState newState = state;
 		for(Direction dir : Direction.values())
-			newState = newState.setValue(directionProperty(dir), state.getValue(directionProperty(mirror.mirror(dir))));
+			newState = newState.setValue(MiscUtil.directionProperty(dir), state.getValue(MiscUtil.directionProperty(mirror.mirror(dir))));
 		return newState;
 	}
 
@@ -90,7 +87,7 @@ public class HollowWoodBlock extends HollowFrameBlock {
 			Vec3 exactPos = context.getClickLocation();
 			BlockPos centerPos = context.getClickedPos();
 			Direction face = Direction.getNearest(exactPos.x - (centerPos.getX() + 0.5), exactPos.y - (centerPos.getY() + 0.5), exactPos.z - (centerPos.getZ() + 0.5));
-			return state.cycle(directionProperty(face));
+			return state.cycle(MiscUtil.directionProperty(face));
 		}
 		return super.getToolModifiedStateZeta(state, context, toolActionType, simulate);
 	}

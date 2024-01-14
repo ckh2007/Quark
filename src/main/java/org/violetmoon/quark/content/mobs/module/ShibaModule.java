@@ -1,8 +1,6 @@
 package org.violetmoon.quark.content.mobs.module;
 
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.config.QuarkGeneralConfig;
-import org.violetmoon.quark.base.world.EntitySpawnHandler;
 import org.violetmoon.quark.content.mobs.client.render.entity.ShibaRenderer;
 import org.violetmoon.quark.content.mobs.entity.Shiba;
 import org.violetmoon.zeta.advancement.ManualTrigger;
@@ -17,6 +15,7 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.world.EntitySpawnHandler;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -57,8 +56,8 @@ public class ShibaModule extends ZetaModule {
 				.build("shiba");
 		Quark.ZETA.registry.register(shibaType, "shiba", Registries.ENTITY_TYPE);
 
-		EntitySpawnHandler.registerSpawn(shibaType, MobCategory.CREATURE, Type.ON_GROUND, Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, spawnConfig);
-		EntitySpawnHandler.addEgg(this, shibaType, 0xa86741, 0xe8d5b6, spawnConfig);
+		Quark.ZETA.entitySpawn.registerSpawn(shibaType, MobCategory.CREATURE, Type.ON_GROUND, Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, spawnConfig);
+		Quark.ZETA.entitySpawn.addEgg(this, shibaType, 0xa86741, 0xe8d5b6, spawnConfig);
 
 		event.getAdvancementModifierRegistry().addModifier(new TwoByTwoModifier(this, ImmutableSet.of(shibaType)));
 

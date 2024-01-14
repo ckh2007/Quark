@@ -1,5 +1,17 @@
 package org.violetmoon.quark.addons.oddities.block.be;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.addons.oddities.block.TinyPotatoBlock;
+import org.violetmoon.quark.addons.oddities.module.TinyPotatoModule;
+import org.violetmoon.quark.addons.oddities.util.TinyPotatoInfo;
+import org.violetmoon.quark.base.handler.QuarkSounds;
+import org.violetmoon.zeta.util.MiscUtil;
+import org.violetmoon.zeta.util.SimpleInventoryBlockEntity;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,19 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.addons.oddities.block.TinyPotatoBlock;
-import org.violetmoon.quark.addons.oddities.module.TinyPotatoModule;
-import org.violetmoon.quark.addons.oddities.util.TinyPotatoInfo;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.handler.QuarkSounds;
-import org.violetmoon.zeta.util.SimpleInventoryBlockEntity;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TinyPotatoBlockEntity extends SimpleInventoryBlockEntity implements Nameable {
 	public static final String TAG_NAME = "name";

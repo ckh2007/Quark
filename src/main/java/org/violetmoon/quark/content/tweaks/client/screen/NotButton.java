@@ -1,13 +1,15 @@
 package org.violetmoon.quark.content.tweaks.client.screen;
 
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.content.tweaks.client.emote.EmoteDescriptor;
+
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.tweaks.client.emote.EmoteDescriptor;
 
 /**
  * Vanilla btton stuff carries WAY too much baggage about keyboard focus
@@ -75,7 +77,7 @@ public final class NotButton {
 
 		if(hovered) {
 			String name = desc.getLocalizedName();
-			MiscUtil.Client.drawChatBubble(guiGraphics, x, y, mc.font, name, 1F, false);
+			ClientUtil.drawChatBubble(guiGraphics, x, y, mc.font, name, 1F, false);
 		}
 	}
 

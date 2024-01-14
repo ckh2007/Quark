@@ -1,14 +1,6 @@
 package org.violetmoon.quark.content.world.module;
 
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.material.MapColor;
-
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.undergroundstyle.PermafrostStyle;
 import org.violetmoon.quark.content.world.undergroundstyle.base.UndergroundStyleConfig;
 import org.violetmoon.quark.content.world.undergroundstyle.base.UndergroundStyleGenerator;
@@ -24,6 +16,14 @@ import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.registry.CreativeTabManager;
 import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.world.WorldGenHandler;
+
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.material.MapColor;
 
 @ZetaLoadModule(category = "world")
 public class PermafrostModule extends ZetaModule {
@@ -67,7 +67,7 @@ public class PermafrostModule extends ZetaModule {
 		WorldGenHandler.addGenerator(this,
 			new UndergroundStyleGenerator(generationSettings, "permafrost"),
 			GenerationStep.Decoration.UNDERGROUND_DECORATION,
-			WorldGenWeights.UNDERGROUND_BIOMES
+			QuarkWorldGenWeights.UNDERGROUND_BIOMES
 		);
 	}
 

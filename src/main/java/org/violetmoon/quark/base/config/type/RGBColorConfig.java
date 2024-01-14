@@ -1,4 +1,4 @@
-package org.violetmoon.quark.base.config.type.inputtable;
+package org.violetmoon.quark.base.config.type;
 
 import net.minecraft.util.Mth;
 

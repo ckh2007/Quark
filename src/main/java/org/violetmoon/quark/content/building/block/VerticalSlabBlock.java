@@ -36,13 +36,14 @@ import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.block.ext.IZetaBlockExtensions;
 import org.violetmoon.zeta.registry.IZetaBlockColorProvider;
 import org.violetmoon.zeta.registry.IZetaItemColorProvider;
+import org.violetmoon.zeta.util.handler.FuelHandler.ICustomWoodFuelValue;
 
 import java.util.function.Supplier;
 
 /**
  * Base extensible class in case mods want to add their own slabs
  */
-public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock, IZetaBlockColorProvider, IZetaBlockExtensions {
+public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock, IZetaBlockColorProvider, IZetaBlockExtensions, ICustomWoodFuelValue {
 
 	public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.create("type", VerticalSlabType.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -179,6 +180,11 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock, 
 	@Override
 	public @Nullable String getItemColorProviderName() {
 		return parent.get() instanceof IZetaItemColorProvider prov ? prov.getItemColorProviderName() : null;
+	}
+	
+	@Override
+	public int getBurnTimeInTicksWhenWooden() {
+		return 150;
 	}
 
 	public enum VerticalSlabType implements StringRepresentable {

@@ -1,16 +1,9 @@
 package org.violetmoon.quark.content.world.module;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.gen.FairyRingGenerator;
 import org.violetmoon.zeta.config.Config;
 import org.violetmoon.zeta.config.type.DimensionConfig;
@@ -19,9 +12,16 @@ import org.violetmoon.zeta.event.load.ZCommonSetup;
 import org.violetmoon.zeta.event.load.ZConfigChanged;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.world.WorldGenHandler;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.Lists;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
 @ZetaLoadModule(category = "world")
 public class FairyRingsModule extends ZetaModule {
@@ -40,7 +40,7 @@ public class FairyRingsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		WorldGenHandler.addGenerator(this, new FairyRingGenerator(dimensions), Decoration.TOP_LAYER_MODIFICATION, WorldGenWeights.FAIRY_RINGS);
+		WorldGenHandler.addGenerator(this, new FairyRingGenerator(dimensions), Decoration.TOP_LAYER_MODIFICATION, QuarkWorldGenWeights.FAIRY_RINGS);
 	}
 
 	@LoadEvent

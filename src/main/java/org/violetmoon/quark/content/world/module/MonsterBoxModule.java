@@ -1,7 +1,25 @@
 package org.violetmoon.quark.content.world.module;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import java.util.ArrayList;
 
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
+import org.violetmoon.quark.content.world.block.MonsterBoxBlock;
+import org.violetmoon.quark.content.world.block.be.MonsterBoxBlockEntity;
+import org.violetmoon.quark.content.world.gen.MonsterBoxGenerator;
+import org.violetmoon.quark.mixin.mixins.accessor.AccessorLivingEntity;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.config.type.DimensionConfig;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.entity.living.ZLivingDrops;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.world.WorldGenHandler;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -16,25 +34,6 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.quark.base.world.WorldGenWeights;
-import org.violetmoon.quark.content.world.block.MonsterBoxBlock;
-import org.violetmoon.quark.content.world.block.be.MonsterBoxBlockEntity;
-import org.violetmoon.quark.content.world.gen.MonsterBoxGenerator;
-import org.violetmoon.quark.mixin.mixins.accessor.AccessorLivingEntity;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.config.type.DimensionConfig;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.entity.living.ZLivingDrops;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.util.ArrayList;
 
 @ZetaLoadModule(category = "world")
 public class MonsterBoxModule extends ZetaModule {
@@ -78,7 +77,7 @@ public class MonsterBoxModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		WorldGenHandler.addGenerator(this, new MonsterBoxGenerator(dimensions), Decoration.UNDERGROUND_DECORATION, WorldGenWeights.MONSTER_BOXES);
+		WorldGenHandler.addGenerator(this, new MonsterBoxGenerator(dimensions), Decoration.UNDERGROUND_DECORATION, QuarkWorldGenWeights.MONSTER_BOXES);
 	}
 
 	@PlayEvent

@@ -1,5 +1,17 @@
 package org.violetmoon.quark.addons.oddities.block.pipe;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.addons.oddities.block.be.PipeBlockEntity;
+import org.violetmoon.quark.addons.oddities.module.PipesModule;
+import org.violetmoon.zeta.block.ZetaBlock;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.RenderLayerRegistry;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -12,7 +24,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,18 +39,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.violetmoon.quark.addons.oddities.block.be.PipeBlockEntity;
-import org.violetmoon.quark.addons.oddities.module.PipesModule;
-import org.violetmoon.zeta.block.ZetaBlock;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.RenderLayerRegistry;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.violetmoon.quark.base.handler.MiscUtil.directionProperty;
 
 public abstract class BasePipeBlock extends ZetaBlock implements EntityBlock {
 
@@ -155,7 +159,7 @@ public abstract class BasePipeBlock extends ZetaBlock implements EntityBlock {
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 		PipeBlockEntity.ConnectionType type = PipeBlockEntity.computeConnectionTo(level, pos, direction);
-		state = state.setValue(directionProperty(direction), allowsFullConnection(type));
+		state = state.setValue(MiscUtil.directionProperty(direction), allowsFullConnection(type));
 		return state;
 	}
 
@@ -187,14 +191,14 @@ public abstract class BasePipeBlock extends ZetaBlock implements EntityBlock {
 		for(Direction facing : Direction.values()) {
 			PipeBlockEntity.ConnectionType type = PipeBlockEntity.computeConnectionTo(level, pos, facing);
 
-			newState = newState.setValue(directionProperty(facing), allowsFullConnection(type));
+			newState = newState.setValue(MiscUtil.directionProperty(facing), allowsFullConnection(type));
 		}
 
 		return newState;
 	}
 
 	public static boolean isConnected(BlockState state, Direction side) {
-		return state.getValue(directionProperty(side));
+		return state.getValue(MiscUtil.directionProperty(side));
 	}
 
 	@Override

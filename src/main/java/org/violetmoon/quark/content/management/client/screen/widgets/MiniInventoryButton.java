@@ -1,5 +1,15 @@
 package org.violetmoon.quark.content.management.client.screen.widgets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.zeta.util.BooleanSuppliers;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -11,17 +21,6 @@ import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.util.BooleanSuppliers;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class MiniInventoryButton extends Button {
 
@@ -85,7 +84,7 @@ public class MiniInventoryButton extends Button {
 		if(shiftTexture.getAsBoolean())
 			v += (height * 2);
 
-		guiGraphics.blit(MiscUtil.GENERAL_ICONS, getX(), getY(), u, v, width, height);
+		guiGraphics.blit(ClientUtil.GENERAL_ICONS, getX(), getY(), u, v, width, height);
 
 		//we could use vanilla setTooltip, except the tooltip can change (hence the supplier)
 		if(isHovered)

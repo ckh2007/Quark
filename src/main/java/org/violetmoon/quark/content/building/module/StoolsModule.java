@@ -1,5 +1,24 @@
 package org.violetmoon.quark.content.building.module;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.content.building.block.StoolBlock;
+import org.violetmoon.quark.content.building.client.render.entity.StoolEntityRenderer;
+import org.violetmoon.quark.content.building.entity.Stool;
+import org.violetmoon.zeta.client.event.load.ZClientSetup;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.entity.player.ZRightClickBlock;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.Hint;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -14,25 +33,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.building.block.StoolBlock;
-import org.violetmoon.quark.content.building.client.render.entity.StoolEntityRenderer;
-import org.violetmoon.quark.content.building.entity.Stool;
-import org.violetmoon.zeta.client.event.load.ZClientSetup;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.entity.player.ZRightClickBlock;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-import org.violetmoon.zeta.util.Hint;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @ZetaLoadModule(category = "building")
 public class StoolsModule extends ZetaModule {

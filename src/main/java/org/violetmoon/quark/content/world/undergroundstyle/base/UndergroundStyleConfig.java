@@ -1,6 +1,6 @@
 package org.violetmoon.quark.content.world.undergroundstyle.base;
 
-import org.violetmoon.quark.base.config.type.ClusterSizeConfig;
+import org.violetmoon.zeta.config.type.ClusterSizeConfig;
 
 public class UndergroundStyleConfig extends ClusterSizeConfig {
 

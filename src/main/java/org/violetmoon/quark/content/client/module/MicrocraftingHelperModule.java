@@ -1,5 +1,23 @@
 package org.violetmoon.quark.content.client.module;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Stack;
+import java.util.function.BooleanSupplier;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.zeta.client.event.play.ZClientTick;
+import org.violetmoon.zeta.client.event.play.ZRenderContainerScreen;
+import org.violetmoon.zeta.client.event.play.ZScreen;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.bus.ZPhase;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -21,21 +39,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.zeta.client.event.play.ZClientTick;
-import org.violetmoon.zeta.client.event.play.ZRenderContainerScreen;
-import org.violetmoon.zeta.client.event.play.ZScreen;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.bus.ZPhase;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.util.*;
-import java.util.function.BooleanSupplier;
 
 @ZetaLoadModule(category = "client")
 public class MicrocraftingHelperModule extends ZetaModule {
@@ -136,7 +139,7 @@ public class MicrocraftingHelperModule extends ZetaModule {
 					RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
 					mstack.pushPose();
-					guiGraphics.blit(MiscUtil.GENERAL_ICONS, left, top, 0, 0, 108, 80, 20, 256, 256);
+					guiGraphics.blit(ClientUtil.GENERAL_ICONS, left, top, 0, 0, 108, 80, 20, 256, 256);
 					mstack.popPose();
 
 					int start = Math.max(0, recipes.size() - 3);

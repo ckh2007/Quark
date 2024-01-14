@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.violetmoon.quark.base.config.type.inputtable.RGBAColorConfig;
+import org.violetmoon.quark.base.config.type.RGBAColorConfig;
 import org.violetmoon.zeta.client.ZetaClient;
 import org.violetmoon.zeta.client.config.definition.ClientDefinitionExt;
 import org.violetmoon.zeta.client.config.screen.AbstractSectionInputScreen;

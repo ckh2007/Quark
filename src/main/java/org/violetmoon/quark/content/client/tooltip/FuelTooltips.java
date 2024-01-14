@@ -1,5 +1,11 @@
 package org.violetmoon.quark.content.client.tooltip;
 
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.content.client.module.ImprovedTooltipsModule;
+import org.violetmoon.zeta.client.event.play.ZGatherTooltipComponents;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
@@ -14,13 +20,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.client.module.ImprovedTooltipsModule;
-import org.violetmoon.zeta.client.event.play.ZGatherTooltipComponents;
 
 public class FuelTooltips {
 
@@ -56,7 +55,7 @@ public class FuelTooltips {
 
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
 			RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-			guiGraphics.blit(MiscUtil.GENERAL_ICONS, 1, 1, 0, 128, 13, 13, 256, 256);
+			guiGraphics.blit(ClientUtil.GENERAL_ICONS, 1, 1, 0, 128, 13, 13, 256, 256);
 
 			String time = getDisplayString(count);
 			guiGraphics.drawString(font, time, 16, 5, 0xffb600, true);

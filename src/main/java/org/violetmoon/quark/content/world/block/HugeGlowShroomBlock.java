@@ -1,5 +1,14 @@
 package org.violetmoon.quark.content.world.block;
 
+import java.util.function.BooleanSupplier;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.content.world.module.GlimmeringWealdModule;
+import org.violetmoon.zeta.block.IZetaBlock;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.MiscUtil;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,16 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.world.module.GlimmeringWealdModule;
-import org.violetmoon.zeta.block.IZetaBlock;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-
-import java.util.function.BooleanSupplier;
 
 public class HugeGlowShroomBlock extends HugeMushroomBlock implements IZetaBlock {
 

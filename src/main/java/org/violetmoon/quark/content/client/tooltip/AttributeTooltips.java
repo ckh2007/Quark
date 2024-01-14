@@ -1,5 +1,26 @@
 package org.violetmoon.quark.content.client.tooltip;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.content.client.hax.PseudoAccessorItemStack;
+import org.violetmoon.quark.content.client.module.ImprovedTooltipsModule;
+import org.violetmoon.quark.content.client.resources.AttributeDisplayType;
+import org.violetmoon.quark.content.client.resources.AttributeIconEntry;
+import org.violetmoon.quark.content.client.resources.AttributeIconEntry.CompareType;
+import org.violetmoon.quark.content.client.resources.AttributeSlot;
+import org.violetmoon.zeta.client.event.play.ZGatherTooltipComponents;
+import org.violetmoon.zeta.util.ItemNBTHelper;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -24,7 +45,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -33,23 +59,6 @@ import net.minecraft.world.item.TippedArrowItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.content.client.hax.PseudoAccessorItemStack;
-import org.violetmoon.quark.content.client.module.ImprovedTooltipsModule;
-import org.violetmoon.quark.content.client.resources.AttributeDisplayType;
-import org.violetmoon.quark.content.client.resources.AttributeIconEntry;
-import org.violetmoon.quark.content.client.resources.AttributeIconEntry.CompareType;
-import org.violetmoon.quark.content.client.resources.AttributeSlot;
-import org.violetmoon.zeta.client.event.play.ZGatherTooltipComponents;
-import org.violetmoon.zeta.util.ItemNBTHelper;
-
-import java.util.*;
 
 /**
  * @author WireSegal
@@ -372,7 +381,7 @@ public class AttributeTooltips {
 						if(showSlots) {
 							RenderSystem.setShader(GameRenderer::getPositionTexShader);
 							RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-							guiGraphics.blit(MiscUtil.GENERAL_ICONS, x, y, 193 + slot.ordinal() * 9, 35, 9, 9, 256, 256);
+							guiGraphics.blit(ClientUtil.GENERAL_ICONS, x, y, 193 + slot.ordinal() * 9, 35, 9, 9, 256, 256);
 							x += 20;
 						}
 

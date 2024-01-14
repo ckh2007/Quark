@@ -1,11 +1,9 @@
 package org.violetmoon.quark.content.building.module;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import java.util.LinkedList;
+import java.util.List;
 
-import org.violetmoon.quark.base.handler.FuelHandler;
-import org.violetmoon.zeta.util.VanillaWoods;
-import org.violetmoon.zeta.util.VanillaWoods.Wood;
+import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.content.building.block.VariantLadderBlock;
 import org.violetmoon.zeta.config.Config;
 import org.violetmoon.zeta.event.bus.LoadEvent;
@@ -15,9 +13,11 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.VanillaWoods;
+import org.violetmoon.zeta.util.VanillaWoods.Wood;
 
-import java.util.LinkedList;
-import java.util.List;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 @ZetaLoadModule(category = "building", antiOverlap = { "woodworks" })
 public class VariantLaddersModule extends ZetaModule {
@@ -39,7 +39,7 @@ public class VariantLaddersModule extends ZetaModule {
 
 	@LoadEvent
 	public void loadComplete(ZLoadComplete e) {
-		variantLadders.forEach(FuelHandler::addWood);
+		variantLadders.forEach(Quark.ZETA.fuel::addWood);
 	}
 
 	@LoadEvent

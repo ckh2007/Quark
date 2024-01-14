@@ -1,5 +1,33 @@
 package org.violetmoon.quark.base.proxy;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.api.ICustomSorting;
+import org.violetmoon.quark.api.IMagnetTracker;
+import org.violetmoon.quark.api.IPistonCallback;
+import org.violetmoon.quark.api.IRuneColorProvider;
+import org.violetmoon.quark.api.ITransferManager;
+import org.violetmoon.quark.api.QuarkCapabilities;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.capability.CapabilityHandler;
+import org.violetmoon.quark.base.capability.QuarkForgeCapabilities;
+import org.violetmoon.quark.base.config.QuarkGeneralConfig;
+import org.violetmoon.quark.base.handler.ContributorRewardHandler;
+import org.violetmoon.quark.base.handler.QuarkSounds;
+import org.violetmoon.quark.base.handler.WoodSetHandler;
+import org.violetmoon.quark.base.network.QuarkNetwork;
+import org.violetmoon.quark.base.recipe.ExclusionRecipe;
+import org.violetmoon.zeta.config.SyncedFlagHandler;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.module.ZetaCategory;
+import org.violetmoon.zetaimplforge.module.ModFileScanDataModuleFinder;
+
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
@@ -10,32 +38,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import org.jetbrains.annotations.Nullable;
-import org.violetmoon.quark.api.*;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.capability.CapabilityHandler;
-import org.violetmoon.quark.base.capability.QuarkForgeCapabilities;
-import org.violetmoon.quark.base.config.QuarkGeneralConfig;
-import org.violetmoon.quark.base.handler.*;
-import org.violetmoon.quark.base.network.QuarkNetwork;
-import org.violetmoon.quark.base.recipe.ExclusionRecipe;
-import org.violetmoon.quark.base.world.EntitySpawnHandler;
-import org.violetmoon.quark.base.world.WorldGenHandler;
-import org.violetmoon.zeta.config.SyncedFlagHandler;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.module.ZetaCategory;
-import org.violetmoon.zetaimplforge.module.ModFileScanDataModuleFinder;
-
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.List;
 
 public class CommonProxy {
 
@@ -62,27 +65,13 @@ public class CommonProxy {
 		// GLOBAL EVENT LISTENERS
 		Quark.ZETA.loadBus
 				.subscribe(ContributorRewardHandler.class)
-				.subscribe(EntitySpawnHandler.class)
-				.subscribe(FuelHandler.class)
 				.subscribe(QuarkSounds.class)
-				.subscribe(RecipeCrawlHandler.class)
-				.subscribe(ToolInteractionHandler.class)
 				.subscribe(WoodSetHandler.class)
-				.subscribe(WorldGenHandler.class)
 				.subscribe(this);
 
 		Quark.ZETA.playBus
 				.subscribe(CapabilityHandler.class)
-				.subscribe(ContributorRewardHandler.class)
-				.subscribe(FuelHandler.class)
-				.subscribe(RecipeCrawlHandler.class)
-				.subscribe(SyncedFlagHandler.class)
-				.subscribe(ToolInteractionHandler.class);
-
-		MinecraftForge.EVENT_BUS.register(ToolInteractionHandler.class);
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.addListener(this::configChanged);
-		WorldGenHandler.registerBiomeModifier(bus);
+				.subscribe(ContributorRewardHandler.class);
 
 		// OTHER RANDOM SHIT
 		QuarkNetwork.init();

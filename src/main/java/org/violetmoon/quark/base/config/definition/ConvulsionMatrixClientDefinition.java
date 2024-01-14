@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import org.jetbrains.annotations.NotNull;
-import org.violetmoon.quark.base.config.type.inputtable.ConvulsionMatrixConfig;
+import org.violetmoon.quark.base.config.type.ConvulsionMatrixConfig;
 import org.violetmoon.zeta.client.ZetaClient;
 import org.violetmoon.zeta.client.config.definition.ClientDefinitionExt;
 import org.violetmoon.zeta.client.config.screen.AbstractSectionInputScreen;

@@ -1,15 +1,5 @@
 package org.violetmoon.quark.content.building.module;
 
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-
-import org.violetmoon.quark.base.handler.StructureBlockReplacementHandler;
-import org.violetmoon.quark.base.handler.StructureBlockReplacementHandler.StructureHolder;
 import org.violetmoon.zeta.block.ZetaPaneBlock;
 import org.violetmoon.zeta.config.Config;
 import org.violetmoon.zeta.event.bus.LoadEvent;
@@ -18,6 +8,16 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.registry.RenderLayerRegistry;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler.StructureHolder;
+
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 
 @ZetaLoadModule(category = "building")
 public class GoldBarsModule extends ZetaModule {

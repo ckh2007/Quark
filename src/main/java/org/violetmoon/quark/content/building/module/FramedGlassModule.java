@@ -1,12 +1,8 @@
 package org.violetmoon.quark.content.building.module;
 
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.violetmoon.quark.base.handler.MiscUtil;
 import org.violetmoon.zeta.block.IZetaBlock;
 import org.violetmoon.zeta.block.ZetaGlassBlock;
 import org.violetmoon.zeta.block.ZetaInheritedPaneBlock;
@@ -15,9 +11,13 @@ import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaLoadModule;
 import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.MiscUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 
 @ZetaLoadModule(category = "building")
 public class FramedGlassModule extends ZetaModule {

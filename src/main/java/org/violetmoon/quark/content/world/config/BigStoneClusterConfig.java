@@ -1,7 +1,7 @@
 package org.violetmoon.quark.content.world.config;
 
-import org.violetmoon.quark.base.config.type.ClusterSizeConfig;
 import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.config.type.ClusterSizeConfig;
 
 public class BigStoneClusterConfig extends ClusterSizeConfig {
 

@@ -1,5 +1,17 @@
 package org.violetmoon.quark.addons.oddities.magnetsystem;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.addons.oddities.block.be.MagnetBlockEntity;
+import org.violetmoon.quark.addons.oddities.module.MagnetsModule;
+import org.violetmoon.quark.api.IMagnetMoveAction;
+import org.violetmoon.quark.api.IMagnetTracker;
+import org.violetmoon.quark.api.QuarkCapabilities;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.zeta.util.handler.RecipeCrawlHandler;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -9,19 +21,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.addons.oddities.block.be.MagnetBlockEntity;
-import org.violetmoon.quark.addons.oddities.module.MagnetsModule;
-import org.violetmoon.quark.api.IMagnetMoveAction;
-import org.violetmoon.quark.api.IMagnetTracker;
-import org.violetmoon.quark.api.QuarkCapabilities;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.RecipeCrawlHandler;
-
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class MagnetSystem {
 

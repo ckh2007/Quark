@@ -1,5 +1,19 @@
 package org.violetmoon.quark.addons.oddities.client.screen;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.violetmoon.quark.addons.oddities.block.be.MatrixEnchantingTableBlockEntity;
+import org.violetmoon.quark.addons.oddities.inventory.EnchantmentMatrix;
+import org.violetmoon.quark.addons.oddities.inventory.EnchantmentMatrix.Piece;
+import org.violetmoon.quark.addons.oddities.inventory.MatrixEnchantingMenu;
+import org.violetmoon.quark.addons.oddities.module.MatrixEnchantingModule;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.base.client.handler.ClientUtil;
+import org.violetmoon.quark.base.network.message.oddities.MatrixEnchanterOperationMessage;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -15,21 +29,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
-
-import org.jetbrains.annotations.NotNull;
-
-import org.violetmoon.quark.addons.oddities.block.be.MatrixEnchantingTableBlockEntity;
-import org.violetmoon.quark.addons.oddities.inventory.EnchantmentMatrix;
-import org.violetmoon.quark.addons.oddities.inventory.EnchantmentMatrix.Piece;
-import org.violetmoon.quark.addons.oddities.inventory.MatrixEnchantingMenu;
-import org.violetmoon.quark.addons.oddities.module.MatrixEnchantingModule;
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.MiscUtil;
-import org.violetmoon.quark.base.network.message.oddities.MatrixEnchanterOperationMessage;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchantingMenu> {
 
@@ -128,7 +127,7 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 
 	@Override
 	protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		int color = MiscUtil.Client.getGuiTextColor("matrix_enchanting");
+		int color = ClientUtil.getGuiTextColor("matrix_enchanting");
 
 		guiGraphics.drawString(font, enchanter.getDisplayName().getString(), 12, 5, color, false);
 		guiGraphics.drawString(font, playerInv.getDisplayName().getString(), 8, imageHeight - 96 + 2, color, false);

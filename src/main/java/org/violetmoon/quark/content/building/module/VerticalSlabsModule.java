@@ -1,5 +1,22 @@
 package org.violetmoon.quark.content.building.module;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.content.building.block.QuarkVerticalSlabBlock;
+import org.violetmoon.quark.content.building.block.WeatheringCopperVerticalSlabBlock;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.load.ZCommonSetup;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
+
 import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.core.BlockPos;
@@ -16,24 +33,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.ToolActions;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.handler.ToolInteractionHandler;
-import org.violetmoon.quark.content.building.block.QuarkVerticalSlabBlock;
-import org.violetmoon.quark.content.building.block.WeatheringCopperVerticalSlabBlock;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.load.ZCommonSetup;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @ZetaLoadModule(category = "building")
 public class VerticalSlabsModule extends ZetaModule {

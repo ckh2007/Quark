@@ -1,5 +1,41 @@
 package org.violetmoon.quark.content.building.module;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BooleanSupplier;
+
+import org.jetbrains.annotations.Nullable;
+import org.violetmoon.quark.base.Quark;
+import org.violetmoon.quark.base.QuarkClient;
+import org.violetmoon.quark.content.building.block.VariantChestBlock;
+import org.violetmoon.quark.content.building.block.VariantTrappedChestBlock;
+import org.violetmoon.quark.content.building.block.be.VariantChestBlockEntity;
+import org.violetmoon.quark.content.building.block.be.VariantTrappedChestBlockEntity;
+import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
+import org.violetmoon.quark.content.building.recipe.MixedExclusionRecipe;
+import org.violetmoon.quark.mixin.mixins.accessor.AccessorAbstractChestedHorse;
+import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
+import org.violetmoon.zeta.client.event.load.ZClientSetup;
+import org.violetmoon.zeta.config.Config;
+import org.violetmoon.zeta.event.bus.LoadEvent;
+import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
+import org.violetmoon.zeta.event.load.ZRegister;
+import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
+import org.violetmoon.zeta.event.play.entity.living.ZLivingDeath;
+import org.violetmoon.zeta.event.play.entity.player.ZPlayerInteract;
+import org.violetmoon.zeta.module.ZetaLoadModule;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.BooleanSuppliers;
+import org.violetmoon.zeta.util.VanillaWoods;
+import org.violetmoon.zeta.util.VanillaWoods.Wood;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler.StructureHolder;
+
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,42 +60,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.common.Tags;
-
-import org.jetbrains.annotations.Nullable;
-
-import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.base.handler.StructureBlockReplacementHandler;
-import org.violetmoon.quark.base.handler.StructureBlockReplacementHandler.StructureHolder;
-import org.violetmoon.zeta.util.VanillaWoods;
-import org.violetmoon.zeta.util.VanillaWoods.Wood;
-import org.violetmoon.quark.content.building.block.*;
-import org.violetmoon.quark.content.building.block.be.VariantChestBlockEntity;
-import org.violetmoon.quark.content.building.block.be.VariantTrappedChestBlockEntity;
-import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
-import org.violetmoon.quark.content.building.recipe.MixedExclusionRecipe;
-import org.violetmoon.quark.mixin.mixins.accessor.AccessorAbstractChestedHorse;
-import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
-import org.violetmoon.zeta.client.event.load.ZClientSetup;
-import org.violetmoon.zeta.config.Config;
-import org.violetmoon.zeta.event.bus.LoadEvent;
-import org.violetmoon.zeta.event.bus.PlayEvent;
-import org.violetmoon.zeta.event.load.ZConfigChanged;
-import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.event.play.entity.ZEntityJoinLevel;
-import org.violetmoon.zeta.event.play.entity.living.ZLivingDeath;
-import org.violetmoon.zeta.event.play.entity.player.ZPlayerInteract;
-import org.violetmoon.zeta.module.ZetaLoadModule;
-import org.violetmoon.zeta.module.ZetaModule;
-import org.violetmoon.zeta.registry.CreativeTabManager;
-import org.violetmoon.zeta.util.BooleanSuppliers;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BooleanSupplier;
 
 @ZetaLoadModule(category = "building", antiOverlap = { "woodworks" })
 public class VariantChestsModule extends ZetaModule {
