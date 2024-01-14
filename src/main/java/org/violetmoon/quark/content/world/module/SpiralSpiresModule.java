@@ -1,8 +1,21 @@
 package org.violetmoon.quark.content.world.module;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.material.MapColor;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.block.MyaliteCrystalBlock;
@@ -27,22 +40,8 @@ import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zeta.util.Hint;
 import org.violetmoon.zeta.world.WorldGenHandler;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.material.MapColor;
+import java.util.ArrayList;
+import java.util.List;
 
 @ZetaLoadModule(category = "world")
 public class SpiralSpiresModule extends ZetaModule {
@@ -113,7 +112,7 @@ public class SpiralSpiresModule extends ZetaModule {
 
 		Entity entity = event.getEntity();
 		Level world = entity.level();
-		BlockPos pos = new BlockPos((int) event.getTargetX(), (int) event.getTargetY(), (int) event.getTargetZ());
+		BlockPos pos = BlockPos.containing(event.getTargetX(), event.getTargetY(), event.getTargetZ());
 
 		if(!world.isLoaded(pos)) //ex. using /tp to teleport very far away; this function will block until the chunks are generated
 			return;
