@@ -56,16 +56,17 @@ public class DefaultMoveActions {
 						hopper.removeItem(i, 1);
 
 						boolean shouldDrop = true;
-						if(drop.getItem() instanceof BlockItem) {
-							BlockPos farmlandPos = offPos.below();
-							if(world.isEmptyBlock(farmlandPos))
-								farmlandPos = farmlandPos.below();
+						if(drop.getItem() instanceof BlockItem blockItem) {
+							BlockPos groundPos = offPos.below();
+							if(world.isEmptyBlock(groundPos))
+								groundPos = groundPos.below();
+							Block seedType = blockItem.getBlock();
+							if(seedType instanceof IPlantable plantable) {
+								BlockState groundBlock = world.getBlockState(groundPos);
+								if(groundBlock.getBlock().canSustainPlant(groundBlock, world, groundPos,Direction.UP, plantable)) {
 
-							if(world.getBlockState(farmlandPos).getBlock() == Blocks.FARMLAND) {
-								Block seedType = ((BlockItem) drop.getItem()).getBlock();
-								if(seedType instanceof IPlantable) {
-									BlockPos seedPos = farmlandPos.above();
-									if(seedType.canSurvive(state, world, seedPos)) {
+									BlockPos seedPos = groundPos.above();
+									if(state.canSurvive(world, seedPos)) {
 										BlockState seedState = seedType.defaultBlockState();
 										world.playSound(null, seedPos, seedType.getSoundType(seedState).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
@@ -77,9 +78,9 @@ public class DefaultMoveActions {
 						}
 
 						if(shouldDrop) {
-							double x = pos.getX() + 0.5 + ((double) dir.getStepX() * 0.7);
-							double y = pos.getY() + 0.15 + ((double) dir.getStepY() * 0.4);
-							double z = pos.getZ() + 0.5 + ((double) dir.getStepZ() * 0.7);
+							double x = pos.getX() + 0.5 + (dir.getStepX() * 0.7);
+							double y = pos.getY() + 0.15 + (dir.getStepY() * 0.4);
+							double z = pos.getZ() + 0.5 + (dir.getStepZ() * 0.7);
 							ItemEntity entity = new ItemEntity(world, x, y, z, drop);
 							entity.setDeltaMovement(Vec3.ZERO);
 							world.addFreshEntity(entity);

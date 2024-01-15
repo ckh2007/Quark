@@ -166,7 +166,7 @@ public class PistonsMoveTileEntitiesModule extends ZetaModule {
 			CompoundTag currTag = currEntity == null ? null : currEntity.saveWithFullMetadata();
 
 			world.removeBlock(pos, false);
-			if(!block.canSurvive(state, world, pos)) {
+			if(!state.canSurvive( world, pos)) {
 				world.setBlock(pos, state, flags);
 				BlockEntity entity = loadBlockEntitySafe(world, pos, entityTag);
 				callCallback(entity, IPistonCallback::onPistonMovementFinished);
