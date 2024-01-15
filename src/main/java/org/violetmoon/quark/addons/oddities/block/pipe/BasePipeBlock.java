@@ -158,8 +158,16 @@ public abstract class BasePipeBlock extends ZetaBlock implements EntityBlock {
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-		PipeBlockEntity.ConnectionType type = PipeBlockEntity.computeConnectionTo(level, pos, direction);
-		state = state.setValue(MiscUtil.directionProperty(direction), allowsFullConnection(type));
+		for(var d : Direction.values()) {
+			// Very ugly. I'm too lazy to figure out a better solution. Checking the given dir would work for normal pipes but not for encased ones
+			PipeBlockEntity.ConnectionType type = PipeBlockEntity.computeConnectionTo(level, pos, d);
+			boolean fullConnection = allowsFullConnection(type);
+			state = state.setValue(MiscUtil.directionProperty(d), fullConnection);
+		}
+		// This also shouldn't be here but again gives issues with encased pipes
+		if(level.getBlockEntity(pos) instanceof PipeBlockEntity tile) {
+			tile.refreshVisualConnections();
+		}
 		return state;
 	}
 

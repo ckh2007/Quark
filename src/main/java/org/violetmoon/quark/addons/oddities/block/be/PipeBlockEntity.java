@@ -11,6 +11,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import net.minecraft.world.level.block.*;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import org.violetmoon.quark.addons.oddities.block.pipe.BasePipeBlock;
@@ -36,8 +37,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -418,7 +417,8 @@ public class PipeBlockEntity extends SimpleInventoryBlockEntity {
 	private static ConnectionType computeConnectionTo(BlockGetter world, BlockPos pos, Direction face, boolean recursed) {
 		BlockPos truePos = pos.relative(face);
 
-		if(world.getBlockState(truePos).getBlock() instanceof WorldlyContainerHolder)
+		BlockState state = world.getBlockState(truePos);
+		if(state.getBlock() instanceof WorldlyContainerHolder)
 			return ConnectionType.TERMINAL;
 
 		BlockEntity tile = world.getBlockEntity(truePos);
@@ -427,7 +427,7 @@ public class PipeBlockEntity extends SimpleInventoryBlockEntity {
 			if(tile instanceof PipeBlockEntity)
 				return ConnectionType.PIPE;
 			else if(tile instanceof Container || tile.getCapability(ForgeCapabilities.ITEM_HANDLER, face.getOpposite()).isPresent())
-				return tile instanceof ChestBlockEntity ? ConnectionType.TERMINAL_OFFSET : ConnectionType.TERMINAL;
+				return canHaveOffset(state, pos, world, face) ? ConnectionType.TERMINAL_OFFSET : ConnectionType.TERMINAL;
 		}
 
 		checkSides: if(!recursed) {
@@ -445,6 +445,13 @@ public class PipeBlockEntity extends SimpleInventoryBlockEntity {
 		}
 
 		return ConnectionType.NONE;
+	}
+
+	private static boolean canHaveOffset(BlockState state, BlockPos pos, BlockGetter world, Direction dir) {
+		var shape = state.getCollisionShape( world,pos);
+		if(dir.getAxisDirection() == Direction.AxisDirection.NEGATIVE){
+			return shape.max(dir.getAxis())<1;
+		}else return shape.min(dir.getAxis())>0;
 	}
 
 	public static class PipeItem {
