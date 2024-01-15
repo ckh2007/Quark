@@ -214,6 +214,7 @@ public class ShulkerBoxTooltips {
 							EDGE, EDGE, 256, 256);
 				}
 			}
+			RenderSystem.setShaderColor(1,1,1,1);
 		}
 
 		@Override
