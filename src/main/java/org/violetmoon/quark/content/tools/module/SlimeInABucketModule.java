@@ -65,11 +65,10 @@ public class SlimeInABucketModule extends ZetaModule {
 
 						event.getLevel().gameEvent(player, GameEvent.ENTITY_INTERACT, event.getTarget().position());
 						event.getTarget().discard();
-					} else
-						player.swing(hand);
+					}
 
 					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
+					event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 				}
 			}
 		}

@@ -157,7 +157,7 @@ public class PathfindersQuillItem extends ZetaItem implements CreativeTabManager
 		ItemNBTHelper.setBoolean(stack, TAG_IS_SEARCHING, true);
 		ItemNBTHelper.setInt(stack, TAG_SOURCE_X, player.getBlockX());
 		ItemNBTHelper.setInt(stack, TAG_SOURCE_Z, player.getBlockZ());
-		return InteractionResultHolder.success(stack);
+		return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
 	}
 
 	public ResourceLocation getTarget(ItemStack stack) {
@@ -311,7 +311,7 @@ public class PathfindersQuillItem extends ZetaItem implements CreativeTabManager
 
 				if(holder.is(searchKey)) {
 					BlockPos mapPos = new BlockPos(testX, testY, testZ);
-					return InteractionResultHolder.success(mapPos);
+					return InteractionResultHolder.sidedSuccess(mapPos, level.isClientSide);
 				}
 			}
 		}

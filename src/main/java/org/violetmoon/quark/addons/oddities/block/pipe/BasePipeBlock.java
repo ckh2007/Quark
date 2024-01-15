@@ -132,7 +132,7 @@ public abstract class BasePipeBlock extends ZetaBlock implements EntityBlock {
 			} while(!candidates.isEmpty());
 
 			if(fixedAny)
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(worldIn.isClientSide);
 		}
 
 		return super.use(state, worldIn, pos, player, handIn, hit);

@@ -142,12 +142,12 @@ public class TinyPotatoBlock extends ZetaBlock implements SimpleWaterloggedBlock
 			if(player instanceof ServerPlayer sp)
 				TinyPotatoModule.patPotatoTrigger.trigger(sp);
 
-			if(!world.isClientSide) {
+			if(world instanceof ServerLevel serverLevel) {
 				AABB box = SHAPE.bounds();
-				((ServerLevel) world).sendParticles(ParticleTypes.HEART, pos.getX() + box.minX + Math.random() * (box.maxX - box.minX), pos.getY() + box.maxY, pos.getZ() + box.minZ + Math.random() * (box.maxZ - box.minZ), 1, 0, 0, 0, 0);
+				serverLevel.sendParticles(ParticleTypes.HEART, pos.getX() + box.minX + Math.random() * (box.maxX - box.minX), pos.getY() + box.maxY, pos.getZ() + box.minZ + Math.random() * (box.maxZ - box.minZ), 1, 0, 0, 0, 0);
 			}
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(world.isClientSide);
 	}
 
 	@NotNull

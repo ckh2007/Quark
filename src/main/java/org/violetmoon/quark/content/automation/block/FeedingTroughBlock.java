@@ -1,6 +1,7 @@
 package org.violetmoon.quark.content.automation.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -28,6 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 import net.minecraftforge.common.util.ForgeSoundType;
 
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -133,9 +135,9 @@ public class FeedingTroughBlock extends ZetaBlock implements EntityBlock {
 		else {
 			MenuProvider container = this.getMenuProvider(state, world, pos);
 			if(container != null)
-				player.openMenu(container);
+				NetworkHooks.openScreen((ServerPlayer) player, container);
 
-			return InteractionResult.SUCCESS;
+			return InteractionResult.CONSUME;
 		}
 	}
 

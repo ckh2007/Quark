@@ -80,7 +80,7 @@ public class ReplaceScaffoldingModule extends ZetaModule {
 						}
 
 						event.setCanceled(true);
-						event.setCancellationResult(InteractionResult.SUCCESS);
+						event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
 					}
 				}
 			}

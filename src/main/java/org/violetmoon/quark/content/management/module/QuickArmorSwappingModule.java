@@ -29,7 +29,7 @@ public class QuickArmorSwappingModule extends ZetaModule {
 
 		if(player.isCrouching()) {
 			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 
 			swapSlot(player, armorStand, EquipmentSlot.HEAD);
 			swapSlot(player, armorStand, EquipmentSlot.CHEST);

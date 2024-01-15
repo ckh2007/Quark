@@ -60,11 +60,11 @@ public class BottledCloudItem extends ZetaItem {
 				}
 
 				player.getCooldowns().addCooldown(this, 10);
-				return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+				return InteractionResultHolder.sidedSuccess(stack, world.isClientSide);
 			}
 		}
 
-		return new InteractionResultHolder<>(InteractionResult.PASS, stack);
+		return InteractionResultHolder.pass(stack);
 	}
 
 }

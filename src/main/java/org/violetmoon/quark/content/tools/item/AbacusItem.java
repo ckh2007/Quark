@@ -47,7 +47,7 @@ public class AbacusItem extends ZetaItem {
 		else
 			setBlockPos(stack, context.getClickedPos());
 
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
 	}
 
 	public static void setBlockPos(ItemStack stack, BlockPos pos) {

@@ -35,7 +35,7 @@ public class BetterElytraRocketModule extends ZetaModule {
 				player.jumpFromGround();
 
 				event.setCanceled(true);
-				event.setCancellationResult(world.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME);
+				event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
 			}
 
 		}

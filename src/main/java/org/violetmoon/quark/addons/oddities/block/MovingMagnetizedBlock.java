@@ -73,7 +73,7 @@ public class MovingMagnetizedBlock extends ZetaBlock implements EntityBlock {
 	public InteractionResult use(@NotNull BlockState state, Level worldIn, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand handIn, @NotNull BlockHitResult hit) {
 		if(!worldIn.isClientSide && worldIn.getBlockEntity(pos) == null) {
 			worldIn.removeBlock(pos, false);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.CONSUME;
 		} else
 			return InteractionResult.PASS;
 	}

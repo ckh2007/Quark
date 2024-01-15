@@ -156,7 +156,7 @@ public class BackpackModule extends ZetaModule {
 				player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER);
 				
 				event.setCanceled(true);
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 			}
 		}
 	}

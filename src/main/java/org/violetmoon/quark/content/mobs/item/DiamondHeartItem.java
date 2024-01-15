@@ -58,7 +58,7 @@ public class DiamondHeartItem extends ZetaItem {
 				}
 
 				if(variant != null) {
-					if(!world.isClientSide && world instanceof ServerLevelAccessor serverLevel) {
+					if(world instanceof ServerLevelAccessor serverLevel) {
 						world.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 						world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(stateAt));
 
@@ -78,7 +78,7 @@ public class DiamondHeartItem extends ZetaItem {
 							stack.shrink(1);
 					}
 
-					return InteractionResult.SUCCESS;
+					return InteractionResult.sidedSuccess(world.isClientSide);
 				}
 			}
 		}

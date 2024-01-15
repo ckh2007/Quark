@@ -75,7 +75,7 @@ public class ShearVinesModule extends ZetaModule {
 				if(!player.getAbilities().instabuild)
 					MiscUtil.damageStack(player, event.getHand(), stack, 1);
 
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
 				event.setCanceled(true);
 			}
 		}

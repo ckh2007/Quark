@@ -60,7 +60,7 @@ public class BottledCloudModule extends ZetaModule {
 				player.drop(returnStack, false);
 
 			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 		}
 	}
 

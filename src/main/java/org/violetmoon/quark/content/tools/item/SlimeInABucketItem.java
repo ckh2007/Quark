@@ -96,7 +96,7 @@ public class SlimeInABucketItem extends ZetaItem {
 		if(!playerIn.getAbilities().instabuild)
 			playerIn.setItemInHand(hand, new ItemStack(Items.BUCKET));
 
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(worldIn.isClientSide);
 	}
 
 	@NotNull

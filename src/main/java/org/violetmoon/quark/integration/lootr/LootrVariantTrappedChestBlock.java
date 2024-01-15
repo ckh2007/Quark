@@ -85,7 +85,7 @@ public class LootrVariantTrappedChestBlock extends VariantTrappedChestBlock impl
 		} else if(!ChestBlock.isChestBlockedAt(world, pos)) {
 			ChestUtil.handleLootChest(this, world, pos, player);
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(world.isClientSide);
 	}
 
 	@Override
