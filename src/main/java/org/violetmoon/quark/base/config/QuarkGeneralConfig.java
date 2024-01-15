@@ -2,6 +2,8 @@ package org.violetmoon.quark.base.config;
 
 import java.util.List;
 
+import org.violetmoon.quark.addons.oddities.client.screen.BackpackInventoryScreen;
+import org.violetmoon.quark.addons.oddities.client.screen.CrateScreen;
 import org.violetmoon.quark.base.handler.SimilarBlockTypeHandler;
 import org.violetmoon.zeta.config.Config;
 
@@ -15,8 +17,8 @@ public class QuarkGeneralConfig {
 			"appeng.client.gui.implementations.SkyChestScreen",
 			"com.progwml6.ironchest.client.screen.IronChestScreen",
 			"net.mehvahdjukaar.supplementaries.client.screens.SackScreen",
-			"vazkii.quark.addons.oddities.client.screen.CrateScreen",
-			"vazkii.quark.addons.oddities.client.screen.BackpackInventoryScreen"
+			CrateScreen.class.getName(),
+			BackpackInventoryScreen.class.getName()
 	);
 
 	private static final List<String> STATIC_DENIED_SCREENS = Lists.newArrayList(
