@@ -117,6 +117,7 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 
 			if(!has && mc.player.experienceLevel < xpMin) {
 				text = I18n.get("quark.gui.enchanting.min", xpMin);
+				x += 4;
 			}
 
 			x -= font.width(text) / 2;

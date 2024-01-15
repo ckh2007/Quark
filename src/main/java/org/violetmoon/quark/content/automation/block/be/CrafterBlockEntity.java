@@ -168,9 +168,10 @@ public class CrafterBlockEntity extends BaseContainerBlockEntity implements Craf
 		IntStream stream = getAvailableSlots(inv, dir);
 		int inserted = 0;
 		int slotMax = Math.min(stack.getMaxStackSize(), inv.getMaxStackSize());
-		if (inv instanceof CrafterBlockEntity) {
+		if (CrafterModule.useEmiLogic && inv instanceof CrafterBlockEntity) {
 			slotMax = 1;
 		}
+		
 		for (int i : stream.toArray()) {
 			if (inv instanceof WorldlyContainer si && !si.canPlaceItemThroughFace(i, stack, dir)) {
 				continue;
