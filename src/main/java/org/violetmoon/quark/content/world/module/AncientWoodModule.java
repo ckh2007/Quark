@@ -77,6 +77,8 @@ public class AncientWoodModule extends ZetaModule {
 			ComposterBlock.COMPOSTABLES.put(ancient_sapling.asItem(), 0.3F);
 			ComposterBlock.COMPOSTABLES.put(ancient_leaves.asItem(), 0.3F);
 			ComposterBlock.COMPOSTABLES.put(ancient_fruit.asItem(), 0.65F);
+			
+			zeta.fuel.addFuel(ancient_sapling, 100);
 		});
 	}
 
@@ -88,7 +90,6 @@ public class AncientWoodModule extends ZetaModule {
 		ancient_leaves = new ZetaLeavesBlock(woodSet.name, this, MapColor.PLANT);
 		ancient_sapling = new ZetaSaplingBlock("ancient", this, new PassthroughTreeGrower(configuredFeatureKey)); //actually called "ancient_sapling"
 
-		Quark.ZETA.fuel.addFuel(ancient_sapling, 100);
 
 		event.getVariantRegistry().addFlowerPot(ancient_sapling, "ancient_sapling", Functions.identity()); //actually "potted_ancient_sapling"
 
