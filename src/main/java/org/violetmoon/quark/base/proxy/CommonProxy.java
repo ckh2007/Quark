@@ -99,33 +99,10 @@ public class CommonProxy {
 			jingleTheBells = true;
 	}
 
-	@LoadEvent
-	public void setup(ZCommonSetup event) {
-		event.enqueueWork(this::handleQuarkConfigChange);
-	}
-
 	//TODO find a better place for this little one-off thing, lol
 	@LoadEvent
 	public void recipe(ZRegister event) {
 		event.getRegistry().register(ExclusionRecipe.SERIALIZER, "exclusion", Registries.RECIPE_SERIALIZER);
-	}
-
-	//forge event
-	public void configChanged(ModConfigEvent event) {
-		if(!event.getConfig().getModId().equals(Quark.MOD_ID) || Quark.ZETA.configInternals == null)
-			return;
-
-		// https://github.com/VazkiiMods/Quark/commit/b0e00864f74539d8650cb349e88d0302a0fda8e4
-		// "The Forge config api writes to the config file on every single change
-		//  to the config, which would cause the file watcher to trigger
-		//  a config reload while the config gui is committing changes."
-		if(System.currentTimeMillis() - Quark.ZETA.configInternals.debounceTime() > 20)
-			handleQuarkConfigChange();
-	}
-
-	public void handleQuarkConfigChange() {
-		Quark.ZETA.configManager.onReload();
-		Quark.ZETA.loadBus.fire(new ZConfigChanged());
 	}
 
 	/**

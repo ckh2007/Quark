@@ -5,15 +5,20 @@ import java.util.Random;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.client.config.screen.ZetaScreen;
 import org.violetmoon.zeta.client.event.play.ZScreen;
+import org.violetmoon.zeta.event.bus.LoadEvent;
 import org.violetmoon.zeta.event.bus.PlayEvent;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class ClientUtil {
@@ -45,6 +50,16 @@ public class ClientUtil {
 			} else
 				progress = 0;
 		}
+	}
+	
+	@LoadEvent
+	public static void handleQuarkConfigChange(ZConfigChanged z) {
+		Minecraft mc = Minecraft.getInstance();
+		mc.submit(() -> {
+			if(mc.hasSingleplayerServer() && mc.player != null && mc.getSingleplayerServer() != null)
+				for(int i = 0; i < 3; i++)
+					mc.player.sendSystemMessage(Component.translatable("quark.misc.reloaded" + i).withStyle(i == 0 ? ChatFormatting.AQUA : ChatFormatting.WHITE));
+		});
 	}
 
 	public static int getGuiTextColor(String name) {
