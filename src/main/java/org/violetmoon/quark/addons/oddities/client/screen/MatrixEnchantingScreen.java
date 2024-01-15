@@ -29,6 +29,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchantingMenu> {
 
@@ -84,6 +86,8 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 	@Override
 	protected void renderBg(@NotNull GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
 		Minecraft mc = getMinecraft();
+		PoseStack pose = guiGraphics.pose();
+
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -102,27 +106,45 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 		if(enchanter.matrix != null
 				&& enchanter.matrix.canGeneratePiece(enchanter.influences, enchanter.bookshelfPower, enchanter.enchantability)
 				&& !mc.player.getAbilities().instabuild) {
-			int x = i + 74;
-			int y = j + 58;
+			int x = i + 71;
+			int y = j + 56;
 			int xpCost = enchanter.matrix.getNewPiecePrice();
 			int xpMin = enchanter.matrix.getMinXpLevel(enchanter.bookshelfPower);
 			boolean has = enchanter.matrix.validateXp(mc.player, enchanter.bookshelfPower);
+			
 			guiGraphics.blit(BACKGROUND, x, y, 0, imageHeight, 10, 10);
 			String text = String.valueOf(xpCost);
 
 			if(!has && mc.player.experienceLevel < xpMin) {
-				guiGraphics.drawString(font, "!", x + 6, y + 3, 0xFF0000, true);
 				text = I18n.get("quark.gui.enchanting.min", xpMin);
 			}
 
-			x -= (font.width(text) - 5);
-			y += 3;
-			guiGraphics.drawString(font, text, x - 1, y, 0);
-			guiGraphics.drawString(font, text, x + 1, y, 0);
-			guiGraphics.drawString(font, text, x, y + 1, 0);
-			guiGraphics.drawString(font, text, x, y - 1, 0);
-			guiGraphics.drawString(font, text, x, y, has ? 0xc8ff8f : 0xff8f8f);
+			x -= font.width(text) / 2;
+			drawBorderedText(guiGraphics, text, x + 2, y + 5, has ? 0xc8ff8f : 0xff8f8f);
+			
+			text = ""+enchanter.bookshelfPower;
+			x = i + 50;
+			y = j + 55;
+			
+			pose.pushPose();
+			guiGraphics.renderItem(new ItemStack(Items.BOOK), x, y);
+			pose.translate(0, 0, 1000);
+			
+			x -= font.width(text) / 2;
+			
+			drawBorderedText(guiGraphics, text, x + 3, y + 6, 0xc8ff8f);
+			pose.popPose();
 		}
+		
+
+	}
+	
+	private void drawBorderedText(GuiGraphics guiGraphics, String text, int x, int y, int color) {
+		guiGraphics.drawString(font, text, x - 1, y, 0, false);
+		guiGraphics.drawString(font, text, x + 1, y, 0, false);
+		guiGraphics.drawString(font, text, x, y + 1, 0, false);
+		guiGraphics.drawString(font, text, x, y - 1, 0, false);
+		guiGraphics.drawString(font, text, x, y, color, false);
 	}
 
 	@Override
