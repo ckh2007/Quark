@@ -64,7 +64,7 @@ public class QuarkItemFrameItem extends ZetaItem {
 				stack.shrink(1);
 			}
 
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(world.isClientSide);
 		}
 	}
 

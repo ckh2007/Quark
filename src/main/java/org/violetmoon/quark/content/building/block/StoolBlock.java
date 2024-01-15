@@ -108,7 +108,7 @@ public class StoolBlock extends ZetaBlock implements SimpleWaterloggedBlock {
 			worldIn.setBlockAndUpdate(pos, state.setValue(SAT_IN, true));
 		}
 
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(worldIn.isClientSide);
 	}
 
 	@Override

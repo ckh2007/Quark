@@ -60,7 +60,7 @@ public class CloudBlock extends ZetaBlock implements EntityBlock {
 		if(stack.getItem() == Items.GLASS_BOTTLE) {
 			fillBottle(player, player.getInventory().selected);
 			world.removeBlock(pos, false);
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(world.isClientSide);
 		}
 
 		if(stack.getItem() instanceof BlockItem bitem) {
@@ -79,7 +79,7 @@ public class CloudBlock extends ZetaBlock implements EntityBlock {
 					fillBottle(player, 0);
 				}
 
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(world.isClientSide);
 			}
 		}
 

@@ -128,10 +128,10 @@ public class RopeBlock extends ZetaBlock implements IZetaBlockItemProvider, Simp
 						stack.shrink(1);
 
 					worldIn.playSound(null, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, 0.5F, 1F);
-					return InteractionResult.SUCCESS;
+					return InteractionResult.sidedSuccess(worldIn.isClientSide);
 				}
 			} else if(stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) { //TODO: Forge extension
-				return FluidUtil.interactWithFluidHandler(player, hand, worldIn, getBottomPos(worldIn, pos), Direction.UP) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+				return FluidUtil.interactWithFluidHandler(player, hand, worldIn, getBottomPos(worldIn, pos), Direction.UP) ? InteractionResult.sidedSuccess(worldIn.isClientSide) : InteractionResult.PASS;
 			} else if(stack.getItem() == Items.GLASS_BOTTLE) {
 				BlockPos bottomPos = getBottomPos(worldIn, pos);
 				BlockState stateAt = worldIn.getBlockState(bottomPos);
@@ -147,7 +147,7 @@ public class RopeBlock extends ZetaBlock implements IZetaBlockItemProvider, Simp
 					else if(!player.getInventory().add(bottleStack))
 						player.drop(bottleStack, false);
 
-					return InteractionResult.SUCCESS;
+					return InteractionResult.sidedSuccess(worldIn.isClientSide);
 				}
 
 				return InteractionResult.PASS;
@@ -159,7 +159,7 @@ public class RopeBlock extends ZetaBlock implements IZetaBlockItemProvider, Simp
 					}
 
 					worldIn.playSound(null, pos, soundType.getBreakSound(), SoundSource.BLOCKS, 0.5F, 1F);
-					return InteractionResult.SUCCESS;
+					return InteractionResult.sidedSuccess(worldIn.isClientSide);
 				}
 			}
 		}

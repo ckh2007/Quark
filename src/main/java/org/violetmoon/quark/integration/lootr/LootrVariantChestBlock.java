@@ -76,7 +76,7 @@ public class LootrVariantChestBlock extends VariantChestBlock implements IZetaBl
 		} else if(!ChestBlock.isChestBlockedAt(world, pos)) {
 			ChestUtil.handleLootChest(this, world, pos, player);
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(world.isClientSide);
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class LootrVariantChestBlock extends VariantChestBlock implements IZetaBl
 						if(newEntity != null && nbt != null)
 							newEntity.load(nbt);
 
-						return InteractionResult.SUCCESS;
+						return InteractionResult.sidedSuccess(level.isClientSide);
 					}
 				}
 			}

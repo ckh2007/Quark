@@ -94,7 +94,7 @@ public class MatrixEnchantingTableBlock extends EnchantmentTableBlock implements
 		} else
 			worldIn.setBlockAndUpdate(pos, Blocks.ENCHANTING_TABLE.defaultBlockState());
 
-		return InteractionResult.SUCCESS;
+		return InteractionResult.sidedSuccess(worldIn.isClientSide);
 	}
 
 	@Override

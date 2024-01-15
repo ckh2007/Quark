@@ -255,22 +255,22 @@ public class Shiba extends TamableAnimal {
 	public InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
+		Level level = this.level();
 		if(player.isDiscrete() && player.getMainHandItem().isEmpty()) {
 			if(hand == InteractionHand.MAIN_HAND && WantLoveGoal.canPet(this)) {
-				if(player.level() instanceof ServerLevel serverLevel) {
+				if(level instanceof ServerLevel serverLevel) {
 					Vec3 pos = position();
 					serverLevel.sendParticles(ParticleTypes.HEART, pos.x, pos.y + 0.5, pos.z, 1, 0, 0, 0, 0.1);
 					playSound(QuarkSounds.ENTITY_SHIBA_WHINE, 0.6F, 0.5F + (float) Math.random() * 0.5F);
-				} else
-					player.swing(InteractionHand.MAIN_HAND);
+				}
 
 				WantLoveGoal.setPetTime(this);
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
-
-			return InteractionResult.SUCCESS;
-		} else if(this.level().isClientSide) {
+		}
+		else if(level.isClientSide) {
 			boolean flag = this.isOwnedBy(player) || this.isTame() || item == Items.BONE && !this.isTame();
-			return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
+			return flag ? InteractionResult.SUCCESS : InteractionResult.PASS;
 		} else {
 			if(this.isTame()) {
 				ItemStack mouthItem = getMouthItem();
@@ -285,7 +285,7 @@ public class Shiba extends TamableAnimal {
 						playSound(QuarkSounds.ENTITY_SHIBA_WHINE, 0.6F, 0.5F + (float) Math.random() * 0.5F);
 					}
 					setMouthItem(ItemStack.EMPTY);
-					return InteractionResult.SUCCESS;
+					return InteractionResult.CONSUME;
 				}
 
 				if(this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
@@ -294,7 +294,7 @@ public class Shiba extends TamableAnimal {
 					}
 
 					this.heal((float) item.getFoodProperties().getNutrition());
-					return InteractionResult.SUCCESS;
+					return InteractionResult.CONSUME;
 				}
 
 				if(!(item instanceof DyeItem)) {
@@ -304,7 +304,7 @@ public class Shiba extends TamableAnimal {
 						itemstack.setCount(itemstack.getCount() - 1);
 
 						setMouthItem(copy);
-						return InteractionResult.SUCCESS;
+						return InteractionResult.CONSUME;
 					}
 
 					InteractionResult actionresulttype = super.mobInteract(player, hand);
@@ -313,7 +313,7 @@ public class Shiba extends TamableAnimal {
 						this.jumping = false;
 						this.navigation.stop();
 						this.setTarget(null);
-						return InteractionResult.SUCCESS;
+						return InteractionResult.CONSUME;
 					}
 
 					return actionresulttype;
@@ -326,7 +326,7 @@ public class Shiba extends TamableAnimal {
 						itemstack.shrink(1);
 					}
 
-					return InteractionResult.SUCCESS;
+					return InteractionResult.CONSUME;
 				}
 			} else if(item == Items.BONE) {
 				if(!player.getAbilities().instabuild) {
@@ -340,16 +340,15 @@ public class Shiba extends TamableAnimal {
 					this.navigation.stop();
 					this.setTarget(null);
 					this.setOrderedToSit(true);
-					this.level().broadcastEntityEvent(this, (byte) 7);
+					level.broadcastEntityEvent(this, (byte) 7);
 				} else {
-					this.level().broadcastEntityEvent(this, (byte) 6);
+					level.broadcastEntityEvent(this, (byte) 6);
 				}
 
-				return InteractionResult.SUCCESS;
+				return InteractionResult.CONSUME;
 			}
-
-			return super.mobInteract(player, hand);
 		}
+		return super.mobInteract(player, hand);
 	}
 
 	@Override

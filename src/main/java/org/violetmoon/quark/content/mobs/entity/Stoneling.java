@@ -173,73 +173,75 @@ public class Stoneling extends PathfinderMob {
 			ItemStack playerItem = player.getItemInHand(hand);
 			Vec3 pos = position();
 
-			if(!level().isClientSide) {
-				if(isPlayerMade()) {
-					if(!player.isDiscrete() && !playerItem.isEmpty()) {
-						StonelingVariant currentVariant = getVariant();
-						StonelingVariant targetVariant = null;
-						Block targetBlock = null;
-						mainLoop: for(StonelingVariant variant : StonelingVariant.values()) {
-							for(Block block : variant.getBlocks()) {
-								if(block.asItem() == playerItem.getItem()) {
-									targetVariant = variant;
-									targetBlock = block;
-									break mainLoop;
-								}
+			Level level = level();
+			if(isPlayerMade()) {
+				if(!player.isDiscrete() && !playerItem.isEmpty()) {
+					StonelingVariant currentVariant = getVariant();
+					StonelingVariant targetVariant = null;
+					Block targetBlock = null;
+					mainLoop: for(StonelingVariant variant : StonelingVariant.values()) {
+						for(Block block : variant.getBlocks()) {
+							if(block.asItem() == playerItem.getItem()) {
+								targetVariant = variant;
+								targetBlock = block;
+								break mainLoop;
 							}
 						}
+					}
 
-						if(targetVariant != null) {
-							if(level() instanceof ServerLevel serverLevel) {
-								serverLevel.sendParticles(ParticleTypes.HEART, pos.x, pos.y + getBbHeight(), pos.z, 1, 0.1, 0.1, 0.1, 0.1);
-								if(targetVariant != currentVariant)
-									serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, targetBlock.defaultBlockState()), pos.x, pos.y + getBbHeight() / 2, pos.z, 16, 0.1, 0.1, 0.1, 0.25);
-							}
-
-							if(targetVariant != currentVariant) {
-								playSound(QuarkSounds.ENTITY_STONELING_EAT, 1F, 1F);
-								entityData.set(VARIANT, targetVariant.getIndex());
-							}
-
-							playSound(QuarkSounds.ENTITY_STONELING_PURR, 1F, 1F + level().random.nextFloat());
-
-							heal(1);
-
-							if(!player.getAbilities().instabuild)
-								playerItem.shrink(1);
-
-							return InteractionResult.SUCCESS;
+					if(targetVariant != null) {
+						if(level instanceof ServerLevel serverLevel) {
+							serverLevel.sendParticles(ParticleTypes.HEART, pos.x, pos.y + getBbHeight(), pos.z, 1, 0.1, 0.1, 0.1, 0.1);
+							if(targetVariant != currentVariant)
+								serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, targetBlock.defaultBlockState()), pos.x, pos.y + getBbHeight() / 2, pos.z, 16, 0.1, 0.1, 0.1, 0.25);
 						}
 
-						return InteractionResult.PASS;
+						if(targetVariant != currentVariant) {
+							playSound(QuarkSounds.ENTITY_STONELING_EAT, 1F, 1F);
+							entityData.set(VARIANT, targetVariant.getIndex());
+						}
+
+						playSound(QuarkSounds.ENTITY_STONELING_PURR, 1F, 1F + level.random.nextFloat());
+
+						heal(1);
+
+						if(!player.getAbilities().instabuild)
+							playerItem.shrink(1);
+
+						return InteractionResult.sidedSuccess(level.isClientSide);
 					}
 
-					ItemStack stonelingItem = entityData.get(CARRYING_ITEM);
-
-					if(!stonelingItem.isEmpty() || !playerItem.isEmpty()) {
-						player.setItemInHand(hand, stonelingItem.copy());
-						entityData.set(CARRYING_ITEM, playerItem.copy());
-
-						if(playerItem.isEmpty())
-							playSound(QuarkSounds.ENTITY_STONELING_GIVE, 1F, 1F);
-						else
-							playSound(QuarkSounds.ENTITY_STONELING_TAKE, 1F, 1F);
-					}
-				} else if(StonelingsModule.tamableStonelings && playerItem.is(temptTag())) {
-					heal(8);
-
-					setPlayerMade(true);
-
-					playSound(QuarkSounds.ENTITY_STONELING_PURR, 1F, 1F + level().random.nextFloat());
-
-					if(!player.getAbilities().instabuild)
-						playerItem.shrink(1);
-
-					if(level() instanceof ServerLevel)
-						((ServerLevel) level()).sendParticles(ParticleTypes.HEART, pos.x, pos.y + getBbHeight(), pos.z, 4, 0.1, 0.1, 0.1, 0.1);
-
-					return InteractionResult.SUCCESS;
+					return InteractionResult.PASS;
 				}
+
+				ItemStack stonelingItem = entityData.get(CARRYING_ITEM);
+
+				if(!stonelingItem.isEmpty() || !playerItem.isEmpty()) {
+					player.setItemInHand(hand, stonelingItem.copy());
+					entityData.set(CARRYING_ITEM, playerItem.copy());
+
+					if(playerItem.isEmpty())
+						playSound(QuarkSounds.ENTITY_STONELING_GIVE, 1F, 1F);
+					else
+						playSound(QuarkSounds.ENTITY_STONELING_TAKE, 1F, 1F);
+
+					return InteractionResult.sidedSuccess(level.isClientSide);
+				}
+
+			} else if(StonelingsModule.tamableStonelings && playerItem.is(temptTag())) {
+				heal(8);
+
+				setPlayerMade(true);
+
+				playSound(QuarkSounds.ENTITY_STONELING_PURR, 1F, 1F + level.random.nextFloat());
+
+				if(!player.getAbilities().instabuild)
+					playerItem.shrink(1);
+
+				if(level instanceof ServerLevel serverLevel)
+					serverLevel.sendParticles(ParticleTypes.HEART, pos.x, pos.y + getBbHeight(), pos.z, 4, 0.1, 0.1, 0.1, 0.1);
+
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
 

@@ -51,7 +51,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 			DOWN_SHAPE, UP_SHAPE, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE
 	};
 
-	private static final VoxelShape[] shapeCache = new VoxelShape[64];
+	private static final VoxelShape[] SHAPE_CACHE = new VoxelShape[64];
 
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -59,6 +59,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 		super("pipe", SoundType.COPPER, module);
 	}
 
+	// Convert to encased
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		ItemStack stack = player.getItemInHand(handIn);
@@ -84,7 +85,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 					stack.shrink(1);
 				}
 			}
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(worldIn.isClientSide);
 		}
 
 		return super.use(state, worldIn, pos, player, handIn, hit);
@@ -136,7 +137,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 				index += (1 << dir.ordinal());
 		}
 
-		VoxelShape cached = shapeCache[index];
+		VoxelShape cached = SHAPE_CACHE[index];
 		if(cached == null) {
 			VoxelShape currShape = CENTER_SHAPE;
 
@@ -146,7 +147,7 @@ public class CopperPipeBlock extends BasePipeBlock implements SimpleWaterloggedB
 					currShape = Shapes.or(currShape, SIDE_BOXES[dir.ordinal()]);
 			}
 
-			shapeCache[index] = currShape;
+			SHAPE_CACHE[index] = currShape;
 			cached = currShape;
 		}
 

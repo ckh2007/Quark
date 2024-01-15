@@ -295,6 +295,7 @@ public class Foxhound extends Wolf implements Enemy {
 		if(itemstack.getItem() == Items.BONE && !isTame())
 			return InteractionResult.PASS;
 
+		Level level = level();
 		if(this.isTame()) {
 			if(timeUntilPotatoEmerges <= 0 && itemstack.is(TinyPotatoModule.tiny_potato.asItem())) {
 				timeUntilPotatoEmerges = 600;
@@ -302,31 +303,31 @@ public class Foxhound extends Wolf implements Enemy {
 				playSound(QuarkSounds.ENTITY_FOXHOUND_EAT, 1f, 1f);
 				if(!player.getAbilities().instabuild)
 					itemstack.shrink(1);
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		} else {
 			if(!itemstack.isEmpty()) {
-				if(itemstack.getItem() == Items.COAL && (level().getDifficulty() == Difficulty.PEACEFUL || player.getAbilities().invulnerable || player.getEffect(MobEffects.FIRE_RESISTANCE) != null) && !level().isClientSide) {
+				if(itemstack.getItem() == Items.COAL && (level.getDifficulty() == Difficulty.PEACEFUL || player.getAbilities().invulnerable || player.getEffect(MobEffects.FIRE_RESISTANCE) != null) && !level.isClientSide) {
 					if(random.nextDouble() < FoxhoundModule.tameChance) {
 						this.tame(player);
 						this.navigation.stop();
 						this.setTarget(null);
 						this.setOrderedToSit(true);
 						this.setHealth(20.0F);
-						this.level().broadcastEntityEvent(this, (byte) 7);
+						level.broadcastEntityEvent(this, (byte) 7);
 					} else {
-						this.level().broadcastEntityEvent(this, (byte) 6);
+						level.broadcastEntityEvent(this, (byte) 6);
 					}
 
 					if(!player.getAbilities().instabuild)
 						itemstack.shrink(1);
-					return InteractionResult.SUCCESS;
+					return InteractionResult.sidedSuccess(level.isClientSide);
 				}
 			}
 		}
 
 		InteractionResult res = super.mobInteract(player, hand);
-		if(res == InteractionResult.SUCCESS && !level().isClientSide)
+		if(res.consumesAction() && !level.isClientSide)
 			setWoke();
 
 		return res;

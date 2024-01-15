@@ -232,7 +232,7 @@ public class VariantChestsModule extends ZetaModule {
 			if(!horse.hasChest() && held.getItem() != Items.CHEST) {
 				if(held.is(Tags.Items.CHESTS_WOODEN)) {
 					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
+					event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 
 					if(!target.level().isClientSide) {
 						ItemStack copy = held.copy();

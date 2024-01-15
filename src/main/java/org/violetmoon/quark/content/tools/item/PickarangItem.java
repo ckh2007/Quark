@@ -123,7 +123,7 @@ public class PickarangItem extends ZetaItem {
 
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
 
-		return new InteractionResultHolder<>(InteractionResult.SUCCESS, itemstack);
+		return InteractionResultHolder.sidedSuccess( itemstack, worldIn.isClientSide);
 	}
 
 	@SuppressWarnings("deprecation") //Avoiding FOrge extension

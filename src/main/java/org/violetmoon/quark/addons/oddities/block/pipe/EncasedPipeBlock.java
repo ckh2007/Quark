@@ -26,7 +26,7 @@ public class EncasedPipeBlock extends BasePipeBlock {
 
 	@Override
 	public boolean allowsFullConnection(ConnectionType conn) {
-		return conn.isFlared || conn.isSolid;
+		return  conn.isSolid || conn.isFlared;
 	}
 
 	@Override

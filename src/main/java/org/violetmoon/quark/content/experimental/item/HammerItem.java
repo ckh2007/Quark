@@ -57,8 +57,7 @@ public class HammerItem extends ZetaItem {
 				} else {
 					level.setBlock(pos, state, 0);
 				}
-
-				return InteractionResult.SUCCESS;
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			}
 		}
 

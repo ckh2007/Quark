@@ -54,7 +54,7 @@ public class SoulBeadItem extends ZetaItem {
 			playerIn.swing(handIn);
 
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
-		return new InteractionResultHolder<>(InteractionResult.SUCCESS, itemstack);
+		return InteractionResultHolder.sidedSuccess(itemstack, worldIn.isClientSide);
 	}
 
 }
