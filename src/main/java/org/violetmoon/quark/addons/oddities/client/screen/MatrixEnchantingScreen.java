@@ -65,6 +65,7 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 		updateButtonStatus();
 
 		pieceList.refresh();
+		enchanter.updateEnchantPower();
 	}
 
 	@Override
@@ -103,17 +104,35 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 
 		pieceList.render(guiGraphics, mouseX, mouseY, partialTicks);
 
-		if(enchanter.matrix != null
+		boolean showCost = enchanter.matrix != null
 				&& enchanter.matrix.canGeneratePiece(enchanter.influences, enchanter.bookshelfPower, enchanter.enchantability)
-				&& !mc.player.getAbilities().instabuild) {
-			int x = i + 71;
-			int y = j + 56;
+				&& !mc.player.getAbilities().instabuild;
+
+		String text = ""+enchanter.bookshelfPower;
+		int x = i + 50;
+		int y = j + 55;
+		
+		if(enchanter.bookshelfPower > 0) {
+			pose.pushPose();
+			guiGraphics.renderItem(new ItemStack(Items.BOOK), x, y);
+			pose.translate(0, 0, 1000);
+	
+			x -= font.width(text) / 2;
+	
+			drawBorderedText(guiGraphics, text, x + 3, y + 6, 0xc8ff8f);
+			pose.popPose();
+		}
+
+		if(showCost) {
 			int xpCost = enchanter.matrix.getNewPiecePrice();
 			int xpMin = enchanter.matrix.getMinXpLevel(enchanter.bookshelfPower);
 			boolean has = enchanter.matrix.validateXp(mc.player, enchanter.bookshelfPower);
 			
+			x = i + 71;
+			y = j + 56;
+			text = String.valueOf(xpCost);
+			
 			guiGraphics.blit(BACKGROUND, x, y, 0, imageHeight, 10, 10);
-			String text = String.valueOf(xpCost);
 
 			if(!has && mc.player.experienceLevel < xpMin) {
 				text = I18n.get("quark.gui.enchanting.min", xpMin);
@@ -122,24 +141,9 @@ public class MatrixEnchantingScreen extends AbstractContainerScreen<MatrixEnchan
 
 			x -= font.width(text) / 2;
 			drawBorderedText(guiGraphics, text, x + 2, y + 5, has ? 0xc8ff8f : 0xff8f8f);
-			
-			text = ""+enchanter.bookshelfPower;
-			x = i + 50;
-			y = j + 55;
-			
-			pose.pushPose();
-			guiGraphics.renderItem(new ItemStack(Items.BOOK), x, y);
-			pose.translate(0, 0, 1000);
-			
-			x -= font.width(text) / 2;
-			
-			drawBorderedText(guiGraphics, text, x + 3, y + 6, 0xc8ff8f);
-			pose.popPose();
 		}
-		
-
 	}
-	
+
 	private void drawBorderedText(GuiGraphics guiGraphics, String text, int x, int y, int color) {
 		guiGraphics.drawString(font, text, x - 1, y, 0, false);
 		guiGraphics.drawString(font, text, x + 1, y, 0, false);
