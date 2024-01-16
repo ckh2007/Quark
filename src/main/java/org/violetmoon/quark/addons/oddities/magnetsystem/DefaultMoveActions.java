@@ -1,5 +1,9 @@
 package org.violetmoon.quark.addons.oddities.magnetsystem;
 
+import java.util.HashMap;
+
+import org.violetmoon.quark.api.IMagnetMoveAction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -9,16 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.HopperBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
-
-import org.violetmoon.quark.api.IMagnetMoveAction;
-
-import java.util.HashMap;
 
 public class DefaultMoveActions {
 
@@ -64,14 +66,27 @@ public class DefaultMoveActions {
 							if(seedType instanceof IPlantable plantable) {
 								BlockState groundBlock = world.getBlockState(groundPos);
 								if(groundBlock.getBlock().canSustainPlant(groundBlock, world, groundPos,Direction.UP, plantable)) {
-
 									BlockPos seedPos = groundPos.above();
 									if(state.canSurvive(world, seedPos)) {
 										BlockState seedState = seedType.defaultBlockState();
 										world.playSound(null, seedPos, seedType.getSoundType(seedState).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
-										world.setBlockAndUpdate(seedPos, seedState);
-										shouldDrop = false;
+										boolean canPlace = true;
+										if(seedState.getBlock() instanceof DoublePlantBlock) {
+											canPlace = false;
+											
+											BlockPos abovePos = seedPos.above();
+											if(world.isEmptyBlock(abovePos)) {
+												world.setBlockAndUpdate(abovePos, seedState.setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
+												canPlace = true;
+											}
+										}
+
+										if(canPlace) {
+											world.setBlockAndUpdate(seedPos, seedState);
+											shouldDrop = false;	
+										}
+
 									}
 								}
 							}
