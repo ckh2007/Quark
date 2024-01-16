@@ -19,6 +19,7 @@ import org.violetmoon.quark.base.handler.ContributorRewardHandler;
 import org.violetmoon.quark.base.handler.WoodSetHandler;
 import org.violetmoon.quark.mixin.mixins.client.accessor.AccessorMultiPlayerGameMode;
 import org.violetmoon.zeta.client.TopLayerTooltipHandler;
+import org.violetmoon.zeta.event.load.ZConfigChanged;
 import org.violetmoon.zeta.network.message.C2SUpdateFlag;
 import org.violetmoon.zeta.util.handler.RequiredModTooltipHandler;
 
@@ -52,7 +53,8 @@ public class ClientProxy extends CommonProxy {
 		Quark.ZETA.loadBus
 				.subscribe(ModelHandler.class) //TODO: Make this especially not a singleton, move it into respective modules
 				.subscribe(ContributorRewardHandler.Client.class)
-				.subscribe(WoodSetHandler.Client.class);
+				.subscribe(WoodSetHandler.Client.class)
+				.subscribe(ClientUtil.class);
 		
 		Quark.ZETA.playBus
 				.subscribe(ContributorRewardHandler.Client.class)
@@ -65,21 +67,6 @@ public class ClientProxy extends CommonProxy {
 		ModLoadingContext.get().registerExtensionPoint(ConfigScreenFactory.class, () -> new ConfigScreenFactory((minecraft, screen) -> new QuarkConfigHomeScreen(screen)));
 
 		copyProgrammerArtIfMissing();
-	}
-
-	@Override
-	public void handleQuarkConfigChange() {
-		super.handleQuarkConfigChange();
-
-		if(Minecraft.getInstance().getConnection() != null)
-			QuarkClient.ZETA_CLIENT.sendToServer(C2SUpdateFlag.createPacket());
-
-		Minecraft mc = Minecraft.getInstance();
-		mc.submit(() -> {
-			if(mc.hasSingleplayerServer() && mc.player != null && mc.getSingleplayerServer() != null)
-				for(int i = 0; i < 3; i++)
-					mc.player.sendSystemMessage(Component.translatable("quark.misc.reloaded" + i).withStyle(i == 0 ? ChatFormatting.AQUA : ChatFormatting.WHITE));
-		});
 	}
 
 	@Override

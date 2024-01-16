@@ -235,14 +235,7 @@ public class MatrixEnchantingTableBlockEntity extends AbstractEnchantingTableBlo
 			matrixId = UUID.randomUUID();
 	}
 
-	private void updateEnchantPower() {
-		ItemStack item = getItem(0);
-		influences.clear();
-		if(item.isEmpty())
-			return;
-
-		enchantability = Quark.ZETA.itemExtensions.get(item).getEnchantmentValueZeta(item);
-
+	public void updateEnchantPower() {
 		boolean allowWater = MatrixEnchantingModule.allowUnderwaterEnchanting;
 		boolean allowShort = MatrixEnchantingModule.allowShortBlockEnchanting;
 
@@ -263,6 +256,11 @@ public class MatrixEnchantingTableBlockEntity extends AbstractEnchantingTableBlo
 		}
 
 		bookshelfPower = Math.min((int) power, MatrixEnchantingModule.maxBookshelves);
+		
+		ItemStack item = getItem(0);
+		influences.clear();
+		if(!item.isEmpty())
+			enchantability = Quark.ZETA.itemExtensions.get(item).getEnchantmentValueZeta(item);
 	}
 
 	private boolean isAirGap(int j, int k, boolean allowWater, boolean allowShortBlock) {

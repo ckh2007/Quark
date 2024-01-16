@@ -118,11 +118,17 @@ public class SpiralSpiresModule extends ZetaModule {
 			return;
 
 		List<BlockPos> myalite = getAdjacentMyalite(null, world, pos, null);
+		
 		if(myalite == null || myalite.isEmpty()) {
 			pos = pos.below();
 			myalite = getAdjacentMyalite(null, world, pos, null);
 		}
 
+		if(myalite == null || myalite.isEmpty()) {
+			pos = pos.relative(event.getEntity().getDirection());
+			myalite = getAdjacentMyalite(null, world, pos, null);
+		}
+		
 		if(myalite != null && !myalite.isEmpty()) {
 			BlockPos prev;
 			BlockPos cond = pos;

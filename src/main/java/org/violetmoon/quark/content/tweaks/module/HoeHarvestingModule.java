@@ -104,8 +104,11 @@ public class HoeHarvestingModule extends ZetaModule {
 
 						if(state.getDestroySpeed(world, pos) != 0.0F)
 							brokeNonInstant = true;
+						
+						block.playerWillDestroy(level, pos, state, player);
 						if(block.canHarvestBlock(state, world, pos, player))
 							block.playerDestroy(level, player, pos, state, world.getBlockEntity(pos), stack);
+						
 						world.destroyBlock(pos, false);
 						world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
 					}

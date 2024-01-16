@@ -15,7 +15,7 @@
 	"quark.gui.button.back": "Back",
 	"quark.gui.button.shift_lock": "Shift Lock",
 
-	"quark.gui.enchanting.min": "Min: %d",
+	"quark.gui.enchanting.min": "%d+",
 	"quark.gui.enchanting.influence": "Candle Influence: +%d%%",
 	"quark.gui.enchanting.dampen": "Candle Influence: %d%%",
 	"quark.gui.enchanting.upgrade": "Upgrade: %d/%d",
