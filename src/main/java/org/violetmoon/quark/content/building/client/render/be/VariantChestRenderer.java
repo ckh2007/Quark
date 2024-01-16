@@ -3,6 +3,7 @@ package org.violetmoon.quark.content.building.client.render.be;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.renderer.Sheets;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -45,7 +46,7 @@ public class VariantChestRenderer extends ChestRenderer<ChestBlockEntity> {
             else
                 tex.append(choose(type, "normal", "left", "right"));
 
-            return new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(Quark.MOD_ID, tex.toString()));
+            return new Material(Sheets.CHEST_SHEET, new ResourceLocation(Quark.MOD_ID, tex.toString()));
         });
     }
 

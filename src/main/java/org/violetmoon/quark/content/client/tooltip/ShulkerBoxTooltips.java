@@ -208,7 +208,6 @@ public class ShulkerBoxTooltips {
 								CORNER + BUFFER, CORNER + BUFFER + EDGE + BUFFER,
 								EDGE, CORNER, 256, 256);
 					}
-
 					guiGraphics.blit(WIDGET_RESOURCE, x + CORNER + EDGE * col, y + CORNER + EDGE * row,
 							CORNER + BUFFER, CORNER + BUFFER,
 							EDGE, EDGE, 256, 256);
