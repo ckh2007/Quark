@@ -57,10 +57,7 @@ public class ContributorRewardHandler {
 	}
 
 	public static void init() {
-		if(thread != null && thread.isAlive())
-			return;
-
-		thread = new ThreadContributorListLoader();
+		return;
 	}
 
 	public static int getTier(Player player) {
@@ -101,20 +98,7 @@ public class ContributorRewardHandler {
 
 		@Override
 		public void run() {
-			try {
-				URL url = new URL("https://raw.githubusercontent.com/VazkiiMods/Quark/master/contributors.properties");
-				URLConnection conn = url.openConnection();
-				conn.setConnectTimeout(10 * 1000);
-				conn.setReadTimeout(10 * 1000);
-
-				Properties patreonTiers = new Properties();
-				try (InputStreamReader reader = new InputStreamReader(conn.getInputStream())) {
-					patreonTiers.load(reader);
-					load(patreonTiers);
-				}
-			} catch (IOException e) {
-				Quark.LOG.error("Failed to load patreon information", e);
-			}
+			Quark.LOG.info("Skip loading contributorlists.");
 		}
 
 	}
